@@ -1,9 +1,14 @@
+"use client"
+
 import portada from '../public/assets/Main_window_images/Imagen_de_portada_de_app_de_notas-removebg-preview.png'
 import Image from 'next/image'
 import styles from './styles/Main_window.module.scss'
 import { FaBolt } from 'react-icons/fa'
+import { useRouter } from 'next/navigation'
 
 export default function NextDoPro () {
+  const router = useRouter()
+
   return (
     <>
       <div className={styles.main_window}>
@@ -12,7 +17,7 @@ export default function NextDoPro () {
             <h1>NextDo Pro<br /> The chaos ends here.</h1>
             <p>Manage taskwith priorities, dynamic filters and deadline sorting for maximum productivity.</p>
           </div>
-          <button><FaBolt style={{display: 'inline', color: 'yellow'}}/>  Get started now</button>
+          <button onClick={() => router.push('/Tasks')}><FaBolt style={{display: 'inline', color: 'yellow'}}/>  Get started now</button>
         </div>
         <div className={styles.image_main_window}>
           <Image src={portada} width={500} height={500} alt='Foto de portada'/>
