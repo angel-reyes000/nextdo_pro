@@ -2,7 +2,7 @@
     display: flex;
     justify-content: center;
     background-color: red;
-    height: 100vh;
+    height: 100%; /*100% para que funcione*/
 }
 
 .all_about_tasks {
@@ -97,6 +97,24 @@
         font-weight: 600;
         color: white;
         height: 100%;
+    }
+}
+
+.description_task {
+    width: 100%;
+    border-radius: 10px;
+    padding: 0%;
+    margin-bottom: 4%;
+    textarea {
+        width: 100%;
+        border: 5px solid rgb(208, 208, 208);
+        background-color: white;
+        padding: 1% 2% 1% 2%;
+        border-radius: 10px;
+        margin-bottom: 0%;
+    }
+    textarea:focus {
+        outline: 0px;
     }
 }
 

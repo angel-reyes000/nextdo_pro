@@ -9,8 +9,8 @@ export default function Tasks () {
     const refPriorityMedium = useRef(null)
     const refPriorityLow = useRef(null)
     const [priorityStateButton, setPriorityStateStateButton] = useState(null)
+    const [inputCreateTask, setInputCreateTask] = useState('')
 
-     
     useEffect(() => {
         let refHigh = refPriorityHigh.current
         let refMedium = refPriorityMedium.current
@@ -67,7 +67,7 @@ export default function Tasks () {
                         </div>
                         <div className={styles.create_task_row_2}>
                             <div className={styles.input_new_task}>
-                                <input placeholder='Input new task'></input>
+                                <input value={inputCreateTask} onChange={(e) => setInputCreateTask(e.target.value)} placeholder='Input new task'></input>
                             </div>
                             <div className={styles.label_input_deadline}>
                                 <label htmlFor='deadline'>Deadline: </label>
@@ -75,7 +75,13 @@ export default function Tasks () {
                             </div>
                             <button><FaPlus size={20} style={{display: 'inline-block', alignContent: 'center', marginBottom: '2%'}}/> Add Task</button>
                         </div>
+                        {inputCreateTask.length > 0 ? (
+                            <div className={styles.description_task}>
+                                <textarea placeholder='Write your description for your task...' cols={2} rows={5}></textarea>
+                            </div>
+                        ) : null}
                     </div>
+                    <hr style={{margin: '1% 0% 1% 0%', border: '3px solid rgb(208, 208, 208)', width: '100%', borderRadius: '10px'}} />
                     {/*Filtros y busqueda*/}
                     <div className={styles.filters_and_search}>
                         <div className={styles.input_filters_and_search}>
