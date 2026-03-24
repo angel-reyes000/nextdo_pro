@@ -1,7 +1,7 @@
 "use client"
 
 import styles from '../styles/tasks.module.scss'
-import { FaPlus } from 'react-icons/fa'
+import { FaPlus, FaCalendar, FaSearch } from 'react-icons/fa'
 import { useState, useRef, useEffect } from 'react'
 
 export default function Tasks () {
@@ -52,7 +52,7 @@ export default function Tasks () {
         <>  
             <div className={styles.tasks_window}>
                 <div className={styles.all_about_tasks}>
-                    {/* Create Tasks*/}
+                    {/* -------------------------------- Create Tasks --------------------------------- */}
                     <div className={styles.create_task}>
                         <div className={styles.create_task_row_1}>
                             <div>
@@ -82,9 +82,10 @@ export default function Tasks () {
                         ) : null}
                     </div>
                     <hr style={{margin: '1% 0% 1% 0%', border: '3px solid rgb(208, 208, 208)', width: '100%', borderRadius: '10px'}} />
-                    {/*Filtros y busqueda*/}
+                    {/* -------------------------- Filtros y busqueda -------------------------------- */}
                     <div className={styles.filters_and_search}>
                         <div className={styles.input_filters_and_search}>
+                            <FaSearch size={20}/>
                             <input placeholder='Search Task...'></input>
                         </div>
                         <div className={styles.select_filters_and_search_filter}>
@@ -105,6 +106,47 @@ export default function Tasks () {
                             <p style={{backgroundColor: 'red'}}>High</p>
                             <p style={{backgroundColor: 'yellow'}}>Medium</p>
                             <p style={{backgroundColor: 'green'}}>Low</p>
+                        </div>
+                    </div>
+                    {/* ---------------------------- Tasks -------------------------------*/}
+                    <div className={styles.tasks}>
+                        <div className={styles.tasks_checkbox}>
+                            <input type="checkbox"></input>
+                        </div>
+                        <div className={styles.information_tasks}>
+                            <div className={styles.header_tasks}>
+                                <p>High</p>
+                                <h2>Priority of high-level report</h2>
+                            </div>
+                            <div className={styles.description_tasks}>
+                                <p>Description: Algo sobre sobre la algo de la algo la descriptionooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo</p>
+                            </div>
+                            <div className={styles.date_tasks}>
+                                <p><FaCalendar style={{display: 'inline'}}/> 20/09/2006</p>
+                            </div>
+                        </div>
+                        <div className={styles.three_dots_tasks}>
+                            <p>...</p>
+                        </div>
+                    </div>
+                    <div className={styles.tasks} style={{borderLeft: '7px solid yellow'}}>
+                        <div className={styles.tasks_checkbox}>
+                            <input type="checkbox"></input>
+                        </div>
+                        <div className={styles.information_tasks}>
+                            <div className={styles.header_tasks}>
+                                <p style={{backgroundColor: 'yellow'}}>Medium</p>
+                                <h2>Priority of high-level report</h2>
+                            </div>
+                            <div className={styles.description_tasks}>
+                                <p>Description: Algo sobre sobre la algo de la algo la descriptionooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo</p>
+                            </div>
+                            <div className={styles.date_tasks}>
+                                <p><FaCalendar style={{display: 'inline'}}/> 20/09/2006</p>
+                            </div>
+                        </div>
+                        <div className={styles.three_dots_tasks}>
+                            <p>...</p>
                         </div>
                     </div>
                 </div>
