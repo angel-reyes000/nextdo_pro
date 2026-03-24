@@ -5,9 +5,14 @@ import Image from 'next/image'
 import styles from './styles/Main_window.module.scss'
 import { FaBolt } from 'react-icons/fa'
 import { useRouter } from 'next/navigation'
+import { useEffect } from 'react'
 
 export default function NextDoPro () {
   const router = useRouter()
+
+  useEffect(() => {
+    console.log("Pagina principal cargada correctamente✅")
+  }, [])
 
   return (
     <>
