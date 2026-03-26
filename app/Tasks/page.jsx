@@ -4,17 +4,48 @@ import styles from '../styles/tasks.module.scss'
 import { FaPlus, FaCalendar, FaSearch } from 'react-icons/fa'
 import { useState, useRef, useEffect } from 'react'
 
+function Add_task ({ title, description, deadline, priority }) {
+    return (
+        <div className={styles.tasks}>
+            <div className={styles.tasks_checkbox}>
+                <input type="checkbox"></input>
+            </div>
+            <div className={styles.information_tasks}>
+                <div className={styles.header_tasks}>
+                    <p>{priority}</p>
+                    <h2>{title}</h2>
+                </div>
+                <div className={styles.description_tasks}>
+                    <p>{description}</p>
+                </div>
+                <div className={styles.date_tasks}>
+                    <p><FaCalendar style={{display: 'inline'}}/> {deadline}</p>
+                </div>
+            </div>
+            <div className={styles.three_dots_tasks}>
+                <p>...</p>
+            </div>
+        </div>
+    )
+}
+
+let ids = 0;
+let list_tasks = []
+
 export default function Tasks () {
     const refPriorityHigh = useRef(null)
     const refPriorityMedium = useRef(null)
     const refPriorityLow = useRef(null)
-    const [priorityStateButton, setPriorityStateStateButton] = useState(null)
+    const [priorityStateButton, setPriorityStateButton] = useState(null)
     const [inputCreateTask, setInputCreateTask] = useState('')
+    const [inputCreateDescriptionTask, setInputCreateDescriptionTask] = useState('')
+    const [inputCreateDeadLineTask, setInputCreateDeadLineTask] = useState('')
+    const [tasks, setTasks] = useState(list_tasks)
 
+    let refHigh = refPriorityHigh.current
+    let refMedium = refPriorityMedium.current
+    let refLow = refPriorityLow.current
     useEffect(() => {
-        let refHigh = refPriorityHigh.current
-        let refMedium = refPriorityMedium.current
-        let refLow = refPriorityLow.current
         if (priorityStateButton === 'high') {
             refHigh.style.backgroundColor = 'red';
             refHigh.style.outline = '3px solid black'
@@ -60,9 +91,9 @@ export default function Tasks () {
                             </div>
                             <div className={styles.create_task_row_1_buttons}>
                                 <p>Priority:</p>
-                                <button ref={refPriorityHigh} onClick={() => setPriorityStateStateButton('high')} style={{backgroundColor: 'rgb(255, 132, 132)'}}>High</button>
-                                <button ref={refPriorityMedium} onClick={() => setPriorityStateStateButton('medium')} style={{backgroundColor: 'rgb(253, 255, 136)'}}>Medium</button>
-                                <button ref={refPriorityLow} onClick={() => setPriorityStateStateButton('low')} style={{backgroundColor: 'rgb(189, 255, 193)'}}>Low</button>
+                                <button ref={refPriorityHigh} onClick={() => setPriorityStateButton('high')} style={{backgroundColor: 'rgb(255, 132, 132)'}}>High</button>
+                                <button ref={refPriorityMedium} onClick={() => setPriorityStateButton('medium')} style={{backgroundColor: 'rgb(253, 255, 136)'}}>Medium</button>
+                                <button ref={refPriorityLow} onClick={() => setPriorityStateButton('low')} style={{backgroundColor: 'rgb(189, 255, 193)'}}>Low</button>
                             </div>
                         </div>
                         <div className={styles.create_task_row_2}>
@@ -71,13 +102,27 @@ export default function Tasks () {
                             </div>
                             <div className={styles.label_input_deadline}>
                                 <label htmlFor='deadline'>Deadline: </label>
-                                <input type='date' placeholder='Deadline' id="deadline" name="deadline"></input>
+                                <input value={inputCreateDeadLineTask} onChange={(e) => setInputCreateDeadLineTask(e.target.value)} type='date' placeholder='Deadline' id="deadline" name="deadline"></input>
                             </div>
-                            <button><FaPlus size={20} style={{display: 'inline-block', alignContent: 'center', marginBottom: '2%'}}/> Add Task</button>
+                            <button onClick={() => {
+                                setTasks([...tasks, {id: ids, title: inputCreateTask, description: inputCreateDescriptionTask, deadline: inputCreateDeadLineTask, priority: priorityStateButton}])
+                                setInputCreateTask('')
+                                setInputCreateDescriptionTask('')
+                                setInputCreateDeadLineTask('')
+                                setPriorityStateButton('')
+                                refHigh.style.backgroundColor = 'rgb(255, 132, 132)'
+                                refHigh.style.outline = '0px'
+                                refMedium.style.backgroundColor = 'rgb(253, 255, 136)'
+                                refMedium.style.outline = '0px'
+                                refLow.style.backgroundColor = 'rgb(189, 255, 193)'
+                                refLow.style.outline = '0px'
+                                }}>
+                                <FaPlus size={20} style={{display: 'inline-block', alignContent: 'center', marginBottom: '2%'}}/> Add Task
+                            </button>
                         </div>
                         {inputCreateTask.length > 0 ? (
                             <div className={styles.description_task}>
-                                <textarea placeholder='Write your description for your task...' cols={2} rows={5}></textarea>
+                                <textarea value={inputCreateDescriptionTask} onChange={(e) => setInputCreateDescriptionTask(e.target.value)} placeholder='Write the description for your task...' cols={2} rows={5}></textarea>
                             </div>
                         ) : null}
                     </div>
@@ -109,46 +154,30 @@ export default function Tasks () {
                         </div>
                     </div>
                     {/* ---------------------------- Tasks -------------------------------*/}
-                    <div className={styles.tasks}>
-                        <div className={styles.tasks_checkbox}>
-                            <input type="checkbox"></input>
-                        </div>
-                        <div className={styles.information_tasks}>
-                            <div className={styles.header_tasks}>
-                                <p>High</p>
-                                <h2>Priority of high-level report</h2>
+                    {tasks.map((task) => (
+                        <>
+                            <div className={styles.tasks} style={{borderLeft: `7px solid ${task.priority === 'high' ? 'red' : task.priority === 'medium' ? 'yellow' : 'green'}`}}>
+                                <div className={styles.tasks_checkbox}>
+                                    <input type="checkbox"></input>
+                                </div>
+                                <div className={styles.information_tasks}>
+                                    <div className={styles.header_tasks}>
+                                        <p style={{backgroundColor: `${task.priority === 'high' ? 'red' : task.priority === 'medium' ? 'yellow' : 'green'}`}}>{task.priority ? task.priority : 'Low'}</p>
+                                        <h2>{task.title}</h2>
+                                    </div>
+                                    <div className={styles.description_tasks}>
+                                        <p>{task.description}</p>
+                                    </div>
+                                    <div className={styles.date_tasks}>
+                                        <p><FaCalendar style={{display: 'inline'}}/> {task.deadline}</p>
+                                    </div>
+                                </div>
+                                <div className={styles.three_dots_tasks}>
+                                    <p>...</p>
+                                </div>
                             </div>
-                            <div className={styles.description_tasks}>
-                                <p>Description: Algo sobre sobre la algo de la algo la descriptionooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo</p>
-                            </div>
-                            <div className={styles.date_tasks}>
-                                <p><FaCalendar style={{display: 'inline'}}/> 20/09/2006</p>
-                            </div>
-                        </div>
-                        <div className={styles.three_dots_tasks}>
-                            <p>...</p>
-                        </div>
-                    </div>
-                    <div className={styles.tasks} style={{borderLeft: '7px solid yellow'}}>
-                        <div className={styles.tasks_checkbox}>
-                            <input type="checkbox"></input>
-                        </div>
-                        <div className={styles.information_tasks}>
-                            <div className={styles.header_tasks}>
-                                <p style={{backgroundColor: 'yellow'}}>Medium</p>
-                                <h2>Priority of high-level report</h2>
-                            </div>
-                            <div className={styles.description_tasks}>
-                                <p>Description: Algo sobre sobre la algo de la algo la descriptionooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo</p>
-                            </div>
-                            <div className={styles.date_tasks}>
-                                <p><FaCalendar style={{display: 'inline'}}/> 20/09/2006</p>
-                            </div>
-                        </div>
-                        <div className={styles.three_dots_tasks}>
-                            <p>...</p>
-                        </div>
-                    </div>
+                        </> 
+                    ))}
                 </div>
             </div>
         </>
