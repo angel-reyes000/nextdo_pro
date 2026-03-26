@@ -8,12 +8,13 @@ import notificacion from '../../public/assets/NavBar_images/simbolo de notificac
 import foto_perfil from '../../public/assets/NavBar_images/foto de perfil nextdo pro navbar.png'
 import lupa from '../../public/assets/NavBar_images/search navbar nextdo pro.png'
 import { FaSearch } from 'react-icons/fa'
-import { useRouter } from 'next/navigation'
+import { useRouter, usePathname } from 'next/navigation'
 import { useState } from 'react'
 
 export default function NavBar(){
     const [input, setInput] = useState('')
     const router = useRouter()
+    const pathName = usePathname()
 
     return (
         <>
@@ -27,7 +28,7 @@ export default function NavBar(){
                         <FaSearch className={styles.fasearch}/>
                     </div>
                     
-                    <input placeholder='Search...' value={input} onChange={(e) => setInput(e.target.value)}/>
+                    <input placeholder='Search...' value={input} onChange={(e) => setInput(e.target.value)} disabled={pathName === '/' ? true : false}/>
                 </div>
                 <div className={styles.imagens_navbar}>
                     <Image src={cuadritos} width={60} height={60} alt='Cuadritos de decoracion'/>

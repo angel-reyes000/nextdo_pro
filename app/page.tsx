@@ -20,7 +20,7 @@ export default function NextDoPro () {
         <div className={styles.text_and_button_main_window}>
           <div className={styles.text_main_window}>
             <h1>NextDo Pro<br /> The chaos ends here.</h1>
-            <p>Manage taskwith priorities, dynamic filters and deadline sorting for maximum productivity.</p>
+            <p>Manage task with priorities, dynamic filters and deadline sorting for maximum productivity.</p>
           </div>
           <button onClick={() => router.push('/Tasks')}><FaBolt style={{display: 'inline', color: 'yellow'}}/>  Get started now</button>
         </div>
