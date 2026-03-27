@@ -31,6 +31,60 @@ export default function Task ({ tasks, inputSearchTask, selectPriority, selectDe
                 ))}
             </>
         )
+    } else if (inputSearchTask === '' && selectPriority === 'all' && selectDeadLine === 'asc') {
+        return (
+            <>
+                {tasks.sort((primero, segundo) => new Date(primero.deadline) - new Date(segundo.deadline)).map((task) => (
+                    <div key={task.id} className={styles.tasks} style={{borderLeft: `7px solid ${task.priority === 'high' ? 'red' : task.priority === 'medium' ? 'yellow' : 'green'}`}}>
+                        <div className={styles.tasks_checkbox}>
+                            <input type="checkbox"></input>
+                        </div>
+                        <div className={styles.information_tasks}>
+                            <div className={styles.header_tasks}>
+                                <p style={{backgroundColor: `${task.priority === 'high' ? 'red' : task.priority === 'medium' ? 'yellow' : 'green'}`}}>{task.priority ? task.priority : 'Low'}</p>
+                                <h2>{task.title}</h2>
+                            </div>
+                            <div className={styles.description_tasks}>
+                                <p>{task.description}</p>
+                            </div>
+                            <div className={styles.date_tasks}>
+                                <p><FaCalendar style={{display: 'inline'}}/> {task.deadline}</p>
+                            </div>
+                        </div>
+                        <div className={styles.three_dots_tasks}>
+                            <p>...</p>
+                        </div>
+                    </div>
+                ))}
+            </>
+        ) 
+    } else if (inputSearchTask === '' && selectPriority === 'all' && selectDeadLine === 'desc') {
+        return (
+            <>
+                {tasks.sort((primero, segundo) => new Date(segundo.deadline) - new Date(primero.deadline)).map((task) => (
+                    <div key={task.id} className={styles.tasks} style={{borderLeft: `7px solid ${task.priority === 'high' ? 'red' : task.priority === 'medium' ? 'yellow' : 'green'}`}}>
+                        <div className={styles.tasks_checkbox}>
+                            <input type="checkbox"></input>
+                        </div>
+                        <div className={styles.information_tasks}>
+                            <div className={styles.header_tasks}>
+                                <p style={{backgroundColor: `${task.priority === 'high' ? 'red' : task.priority === 'medium' ? 'yellow' : 'green'}`}}>{task.priority ? task.priority : 'Low'}</p>
+                                <h2>{task.title}</h2>
+                            </div>
+                            <div className={styles.description_tasks}>
+                                <p>{task.description}</p>
+                            </div>
+                            <div className={styles.date_tasks}>
+                                <p><FaCalendar style={{display: 'inline'}}/> {task.deadline}</p>
+                            </div>
+                        </div>
+                        <div className={styles.three_dots_tasks}>
+                            <p>...</p>
+                        </div>
+                    </div>
+                ))}
+            </>
+        )
     } else if (inputSearchTask !== '' && selectPriority === 'high' && selectDeadLine === 'asc') {
         return (
             <>

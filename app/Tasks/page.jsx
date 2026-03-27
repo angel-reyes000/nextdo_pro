@@ -127,7 +127,7 @@ export default function Tasks () {
                         <div className={styles.select_filters_and_search_sort}>
                             <select value={selectDeadLine} onChange={(e) => setSelectDeadLine(e.target.value)}>
                                 <option value='asc'>Sort by: [Deadline Asc]</option>
-                                <option value='desc'>Sort by: [Deadline Descs]</option>                                
+                                <option value='desc'>Sort by: [Deadline Descs]</option>
                             </select>
                         </div>
                         <div className={styles.priority_filters_and_search}>
