@@ -71,9 +71,7 @@ export default function Task ({ tasks, inputSearchTask, selectPriority, selectDe
                                 <p><FaCalendar style={{display: 'inline'}}/> {task.deadline}</p>
                             </div>
                         </div>
-                        <div className={styles.three_dots_tasks}>
-                            <p>...</p>
-                        </div>
+                        <OpenThreeDots id={task.id}/>
                     </div>
                 ))}
             </>
@@ -123,9 +121,7 @@ export default function Task ({ tasks, inputSearchTask, selectPriority, selectDe
                                 <p><FaCalendar style={{display: 'inline'}}/> {task.deadline}</p>
                             </div>
                         </div>
-                        <div className={styles.three_dots_tasks}>
-                            <p>...</p>
-                        </div>
+                        <OpenThreeDots id={task.id}/>
                     </div>
                 ))}
             </>
@@ -150,9 +146,7 @@ export default function Task ({ tasks, inputSearchTask, selectPriority, selectDe
                                 <p><FaCalendar style={{display: 'inline'}}/> {task.deadline}</p>
                             </div>
                         </div>
-                        <div className={styles.three_dots_tasks}>
-                            <p>...</p>
-                        </div>
+                        <OpenThreeDots id={task.id}/>
                     </div>
                 ))}
             </>
@@ -177,9 +171,7 @@ export default function Task ({ tasks, inputSearchTask, selectPriority, selectDe
                                 <p><FaCalendar style={{display: 'inline'}}/> {task.deadline}</p>
                             </div>
                         </div>
-                        <div className={styles.three_dots_tasks}>
-                            <p>...</p>
-                        </div>
+                        <OpenThreeDots id={task.id}/>
                     </div>
                 ))}
             </>
@@ -204,9 +196,7 @@ export default function Task ({ tasks, inputSearchTask, selectPriority, selectDe
                                 <p><FaCalendar style={{display: 'inline'}}/> {task.deadline}</p>
                             </div>
                         </div>
-                        <div className={styles.three_dots_tasks}>
-                            <p>...</p>
-                        </div>
+                        <OpenThreeDots id={task.id}/>
                     </div>
                 ))}
             </>
@@ -231,9 +221,7 @@ export default function Task ({ tasks, inputSearchTask, selectPriority, selectDe
                                 <p><FaCalendar style={{display: 'inline'}}/> {task.deadline}</p>
                             </div>
                         </div>
-                        <div className={styles.three_dots_tasks}>
-                            <p>...</p>
-                        </div>
+                        <OpenThreeDots id={task.id}/>
                     </div>
                 ))}
             </>
@@ -258,9 +246,7 @@ export default function Task ({ tasks, inputSearchTask, selectPriority, selectDe
                                 <p><FaCalendar style={{display: 'inline'}}/> {task.deadline}</p>
                             </div>
                         </div>
-                        <div className={styles.three_dots_tasks}>
-                            <p>...</p>
-                        </div>
+                        <OpenThreeDots id={task.id}/>
                     </div>
                 ))}
             </>
@@ -285,9 +271,7 @@ export default function Task ({ tasks, inputSearchTask, selectPriority, selectDe
                                 <p><FaCalendar style={{display: 'inline'}}/> {task.deadline}</p>
                             </div>
                         </div>
-                        <div className={styles.three_dots_tasks}>
-                            <p>...</p>
-                        </div>
+                        <OpenThreeDots id={task.id}/>
                     </div>
                 ))}
             </>
@@ -312,9 +296,7 @@ export default function Task ({ tasks, inputSearchTask, selectPriority, selectDe
                                 <p><FaCalendar style={{display: 'inline'}}/> {task.deadline}</p>
                             </div>
                         </div>
-                        <div className={styles.three_dots_tasks}>
-                            <p>...</p>
-                        </div>
+                        <OpenThreeDots id={task.id}/>
                     </div>
                 ))}
             </>
@@ -339,9 +321,7 @@ export default function Task ({ tasks, inputSearchTask, selectPriority, selectDe
                                 <p><FaCalendar style={{display: 'inline'}}/> {task.deadline}</p>
                             </div>
                         </div>
-                        <div className={styles.three_dots_tasks}>
-                            <p>...</p>
-                        </div>
+                        <OpenThreeDots id={task.id}/>
                     </div>
                 ))}
             </>
@@ -366,9 +346,7 @@ export default function Task ({ tasks, inputSearchTask, selectPriority, selectDe
                                 <p><FaCalendar style={{display: 'inline'}}/> {task.deadline}</p>
                             </div>
                         </div>
-                        <div className={styles.three_dots_tasks}>
-                            <p>...</p>
-                        </div>
+                        <OpenThreeDots id={task.id}/>
                     </div>
                 ))}
             </>
@@ -393,9 +371,7 @@ export default function Task ({ tasks, inputSearchTask, selectPriority, selectDe
                                 <p><FaCalendar style={{display: 'inline'}}/> {task.deadline}</p>
                             </div>
                         </div>
-                        <div className={styles.three_dots_tasks}>
-                            <p>...</p>
-                        </div>
+                        <OpenThreeDots id={task.id}/>
                     </div>
                 ))}
             </>
@@ -420,9 +396,7 @@ export default function Task ({ tasks, inputSearchTask, selectPriority, selectDe
                                 <p><FaCalendar style={{display: 'inline'}}/> {task.deadline}</p>
                             </div>
                         </div>
-                        <div className={styles.three_dots_tasks}>
-                            <p>...</p>
-                        </div>
+                        <OpenThreeDots id={task.id}/>
                     </div>
                 ))}
             </>
@@ -447,9 +421,7 @@ export default function Task ({ tasks, inputSearchTask, selectPriority, selectDe
                                 <p><FaCalendar style={{display: 'inline'}}/> {task.deadline}</p>
                             </div>
                         </div>
-                        <div className={styles.three_dots_tasks}>
-                            <p>...</p>
-                        </div>
+                        <OpenThreeDots id={task.id}/>
                     </div>
                 ))}
             </>
@@ -474,9 +446,7 @@ export default function Task ({ tasks, inputSearchTask, selectPriority, selectDe
                                 <p><FaCalendar style={{display: 'inline'}}/> {task.deadline}</p>
                             </div>
                         </div>
-                        <div className={styles.three_dots_tasks}>
-                            <p>...</p>
-                        </div>
+                        <OpenThreeDots id={task.id}/>
                     </div>
                 ))}
             </>
@@ -501,9 +471,7 @@ export default function Task ({ tasks, inputSearchTask, selectPriority, selectDe
                                 <p><FaCalendar style={{display: 'inline'}}/> {task.deadline}</p>
                             </div>
                         </div>
-                        <div className={styles.three_dots_tasks}>
-                            <p>...</p>
-                        </div>
+                        <OpenThreeDots id={task.id}/>
                     </div>
                 ))}
             </>
