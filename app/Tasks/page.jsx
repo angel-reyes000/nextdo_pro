@@ -1,9 +1,11 @@
 "use client"
 
-import styles from '../styles/tasks.module.scss'
-import { FaPlus, FaCalendar, FaSearch } from 'react-icons/fa'
+import styles from '../styles/task_searcher_and_filter.module.scss'
+import styless from '../styles/task.edit.module.scss'
+import { FaPlus, FaCalendar, FaSearch, FaTimes, FaSave } from 'react-icons/fa'
 import { useState, useRef, useEffect } from 'react'
-import Task from './Task.jsx'
+import Task from './task_searcher_and_filter.jsx'
+import Task_edit from './task_edit.jsx'
 
 let ids = 0;
 let list_tasks = []
@@ -16,11 +18,18 @@ export default function Tasks () {
     const [inputCreateTask, setInputCreateTask] = useState('')
     const [inputCreateDescriptionTask, setInputCreateDescriptionTask] = useState('')
     const [inputCreateDeadLineTask, setInputCreateDeadLineTask] = useState('')
+    const [fieldId, setFieldId] = useState(1)
     const [tasks, setTasks] = useState(list_tasks)
     const [inputSearchTask, setInputSearchTask] = useState('')
     const [selectPriority, setSelectPriority] = useState('all')
     const [selectDeadLine, setSelectDeadLine] = useState('asc')
+    const [editingTask, setEditingTask] = useState(null)
 
+    const handleUpdateTask = (updatedTask) => {
+        setTasks(tasks.map(task => task.id === updatedTask.id ? updatedTask : task))
+        setEditingTask(null)
+    }
+    
     let refHigh = refPriorityHigh.current
     let refMedium = refPriorityMedium.current
     let refLow = refPriorityLow.current
@@ -58,6 +67,35 @@ export default function Tasks () {
         console.log("Cambio de prioridad")
     }, [priorityStateButton])
 
+    useEffect(() => { 
+        const getData = async () => {
+            try {
+                const res = await fetch(`http://localhost:${process.env.NEXT_PUBLIC_PORT}/api/notes`);
+                const data = await res.json();
+                setTasks(data.response)
+            } catch (error) {
+                console.error("Error al obtener datos");    
+            }
+        }
+        getData();
+    }, [tasks]);
+
+    async function sendTaskDataBase () {
+        const db = await fetch(`http://localhost:${process.env.NEXT_PUBLIC_PORT}/api/notes`, {
+            method: "POST",
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                id: fieldId,
+                title: inputCreateTask,
+                description: inputCreateDescriptionTask,
+                deadline: inputCreateDeadLineTask,
+                priority: priorityStateButton
+            })
+        })
+    }
+
     return (
         <>  
             <div className={styles.tasks_window}>
@@ -84,11 +122,13 @@ export default function Tasks () {
                                 <input value={inputCreateDeadLineTask} onChange={(e) => setInputCreateDeadLineTask(e.target.value)} type='date' placeholder='Deadline' id="deadline" name="deadline"></input>
                             </div>
                             <button onClick={() => {
-                                setTasks([...tasks, {id: ids++, title: inputCreateTask, description: inputCreateDescriptionTask, deadline: inputCreateDeadLineTask, priority: priorityStateButton !== '' ? priorityStateButton : 'low'}])
+                                setFieldId(fieldId + 1)
+                                setTasks([...tasks, {id: fieldId, title: inputCreateTask, description: inputCreateDescriptionTask, deadline: inputCreateDeadLineTask, priority: priorityStateButton !== '' ? priorityStateButton : 'low'}])
                                 setInputCreateTask('')
                                 setInputCreateDescriptionTask('')
                                 setInputCreateDeadLineTask('')
                                 setPriorityStateButton('')
+                                sendTaskDataBase()
                                 refHigh.style.backgroundColor = 'rgb(255, 132, 132)'
                                 refHigh.style.outline = '0px'
                                 refMedium.style.backgroundColor = 'rgb(253, 255, 136)'
@@ -133,7 +173,8 @@ export default function Tasks () {
                         </div>
                     </div>
                     {/* ---------------------------- Tasks -------------------------------*/}
-                    <Task tasks={tasks} inputSearchTask={inputSearchTask} selectPriority={selectPriority} selectDeadLine={selectDeadLine}/>
+                    {editingTask && <Task_edit task={editingTask} onClose={() => setEditingTask(null)} onSave={handleUpdateTask} />}
+                    <Task tasks={tasks} inputSearchTask={inputSearchTask} selectPriority={selectPriority} selectDeadLine={selectDeadLine} onSelectTask={setEditingTask}/>
                 </div>
             </div>
         </>

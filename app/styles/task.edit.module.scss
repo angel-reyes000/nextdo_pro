@@ -1,0 +1,123 @@
+.backgorund_task_edit{
+    display: flex;
+    justify-content: center;
+    position: absolute;
+    background-color: rgba(100, 100, 100, 0.5);
+    width: 100%;
+    height: 100%;
+    z-index: 30;
+}
+
+.card_edit {
+    display: grid;
+    grid-template-rows: auto auto 2fr 1fr 1fr;
+    margin-top: 2%;
+    height: 70%;
+    width: 50%;
+    background-color: white;
+    position: fixed;
+    padding: 2%;
+    border-radius: 20px;
+}
+
+.edit_header {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    height: 10%;
+    margin-bottom: 1%;
+    button {
+        height: auto;
+        cursor: pointer;
+    }
+}
+
+.edit_title {
+    display: grid;
+    grid-template-columns: auto auto;
+    font-size: 200%;
+    white-space: pre-wrap;
+    box-sizing: border-box;
+    h1 {
+        font-weight: 600;
+    }
+    input {
+        background-color: rgba(226, 226, 226, 1);
+        border-radius: 10px;
+        padding-left: 2%;
+    }
+}
+
+.edit_description {
+    display: grid;
+    grid-template-rows: auto auto;
+    align-content: start;
+    width: auto;
+    height: 100%;
+    h2 {
+        font-size: 150%;
+        font-weight: 600;
+    }
+    textarea {
+        width: auto;
+        height: 170px;
+        padding: 1%;
+        resize: none;
+    }
+}
+
+.edit_date_and_priority {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    justify-items: start;
+    font-size: 130%;
+    gap: 10%;
+    label {
+        width: 100%;
+        margin-right: 100%;
+        font-weight: 600;
+    }
+
+}
+
+.edit_date {
+    display: block;
+    flex-wrap: wrap;
+    width: 100%;
+}
+
+.edit_priority {
+    display: block;
+    grid-template-rows: auto auto;
+    gap: 0%;
+    width: 100%;
+}
+
+.edit_save_and_close {
+    display: flex;
+    justify-content: end;
+    align-items: end;
+    color: white;
+    font-size: 120%;
+    width: 100%;
+    font-weight: 600;
+}
+
+.edit_button_close {
+    text-align: center;
+    background-color: red;
+    width: 20%;
+    height: 30%;
+    border-radius: 5px;
+}
+
+.edit_button_save {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgb(84, 90, 255);
+    width: 20%;
+    height: 30%;
+    border-radius: 5px;
+    margin-left: 2%;
+}

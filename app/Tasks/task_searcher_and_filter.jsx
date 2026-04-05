@@ -1,9 +1,46 @@
 "use client"
 
-import styles from '../styles/tasks.module.scss'
+import styles from '../styles/task_searcher_and_filter.module.scss'
 import { FaCalendar, FaPlus } from 'react-icons/fa'
+import { useEffect, useState } from 'react'
+import { useRouter } from 'next/navigation'
 
-export default function Task ({ tasks, inputSearchTask, selectPriority, selectDeadLine }) {
+function OpenThreeDots ({ id }) {
+    const [optionDelete, setOptionDelete] = useState(false);
+    const router = useRouter()
+
+    const deleteTaskDataBase = async () => {
+        const db = await fetch(`${process.env.NEXT_PUBLIC_RUTE}`, {
+            method: "DELETE",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                id: id
+            })
+        })
+        deleteTaskDataBase()
+    }
+
+    return (
+        <div className={styles.three_dots_tasks} style={{backgroundColor: optionDelete ? 'rgb(232, 230, 230)' : ''}}>
+            <h2 onClick={(e) => {
+                e.stopPropagation()
+                setOptionDelete(!optionDelete)
+            }}>...</h2>
+            {optionDelete ?  <h6 onClick={(e) => {
+                router.refresh()
+                setOptionDelete(!optionDelete)
+                e.stopPropagation()
+                deleteTaskDataBase()
+            }}>Delete</h6> : null}
+        </div>
+    )
+}
+
+export default function Task ({ tasks, inputSearchTask, selectPriority, selectDeadLine, onSelectTask }) {
+    const [optionDelete, setOptionDelete] = useState(false);
+
     if (tasks.length === 0) {
         return (
             <>
@@ -43,9 +80,9 @@ export default function Task ({ tasks, inputSearchTask, selectPriority, selectDe
         )
     } else if (inputSearchTask === '' && selectPriority === 'all' && selectDeadLine === 'asc') {
         return (
-            <>
+            <>  
                 {tasks.sort((primero, segundo) => new Date(primero.deadline) - new Date(segundo.deadline)).map((task) => (
-                    <div key={task.id} className={styles.tasks} style={{borderLeft: `7px solid ${task.priority === 'high' ? 'red' : task.priority === 'medium' ? 'yellow' : 'green'}`}}>
+                    <div key={task.id} onClick={() => onSelectTask(task)} className={styles.tasks} style={{borderLeft: `7px solid ${task.priority === 'high' ? 'red' : task.priority === 'medium' ? 'yellow' : 'green'}`}}>
                         <div className={styles.tasks_checkbox}>
                             <input type="checkbox"></input>
                         </div>
@@ -61,9 +98,7 @@ export default function Task ({ tasks, inputSearchTask, selectPriority, selectDe
                                 <p><FaCalendar style={{display: 'inline'}}/> {task.deadline}</p>
                             </div>
                         </div>
-                        <div className={styles.three_dots_tasks}>
-                            <p>...</p>
-                        </div>
+                        <OpenThreeDots id={task.id}/>
                     </div>
                 ))}
             </>
