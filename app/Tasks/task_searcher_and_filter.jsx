@@ -3,8 +3,43 @@
 import styles from '../styles/task_searcher_and_filter.module.scss'
 import { FaCalendar, FaPlus } from 'react-icons/fa'
 import { useEffect, useState } from 'react'
+import { useRouter } from 'next/navigation'
+
+function OpenThreeDots ({ id }) {
+    const [optionDelete, setOptionDelete] = useState(false);
+    const router = useRouter()
+
+    const deleteTaskDataBase = async () => {
+        const db = await fetch(`${process.env.NEXT_PUBLIC_RUTE}`, {
+            method: "DELETE",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                id: id
+            })
+        })
+        deleteTaskDataBase()
+    }
+
+    return (
+        <div className={styles.three_dots_tasks} style={{backgroundColor: optionDelete ? 'rgb(232, 230, 230)' : ''}}>
+            <h2 onClick={(e) => {
+                e.stopPropagation()
+                setOptionDelete(!optionDelete)
+            }}>...</h2>
+            {optionDelete ?  <h6 onClick={(e) => {
+                router.refresh()
+                setOptionDelete(!optionDelete)
+                e.stopPropagation()
+                deleteTaskDataBase()
+            }}>Delete</h6> : null}
+        </div>
+    )
+}
 
 export default function Task ({ tasks, inputSearchTask, selectPriority, selectDeadLine, onSelectTask }) {
+    const [optionDelete, setOptionDelete] = useState(false);
 
     if (tasks.length === 0) {
         return (
@@ -63,9 +98,7 @@ export default function Task ({ tasks, inputSearchTask, selectPriority, selectDe
                                 <p><FaCalendar style={{display: 'inline'}}/> {task.deadline}</p>
                             </div>
                         </div>
-                        <div className={styles.three_dots_tasks}>
-                            <p>...</p>
-                        </div>
+                        <OpenThreeDots id={task.id}/>
                     </div>
                 ))}
             </>

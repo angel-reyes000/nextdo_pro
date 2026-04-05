@@ -5,6 +5,7 @@ import { FaTimes, FaSave } from 'react-icons/fa'
 import { useState } from 'react'
 
 export default function Task_edit({ task, onClose, onSave }) {
+    const [editID, setEditId] = useState(task.id)
     const [editTitle, setEditTitle] = useState(task.title)
     const [editDescription, setEditDescription] = useState(task.description)
     const [editDeadline, setEditDeadline] = useState(task.deadline)
@@ -13,11 +14,28 @@ export default function Task_edit({ task, onClose, onSave }) {
     const handleSave = () => {
         onSave({
             ...task,
+            id: editID,
             title: editTitle,
             description: editDescription,
             deadline: editDeadline,
             priority: editPriority
         })
+        const updateTaskDataBase = async () => {
+            const db = await fetch(`http://localhost:${process.env.NEXT_PUBLIC_PORT}/api/notes`, {
+                method: "PUT",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    id: editID,
+                    title: editTitle,
+                    description: editDescription,
+                    deadline: editDeadline,
+                    priority: editPriority
+                })
+            });
+        }
+        updateTaskDataBase()
     }
 
     return (
