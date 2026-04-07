@@ -39,7 +39,6 @@ function OpenThreeDots ({ id }) {
 }
 
 export default function Task ({ tasks, inputSearchTask, selectPriority, selectDeadLine, onSelectTask }) {
-    const [optionDelete, setOptionDelete] = useState(false);
 
     if (tasks.length === 0) {
         return (

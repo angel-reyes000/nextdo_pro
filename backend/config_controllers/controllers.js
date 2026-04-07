@@ -1,4 +1,5 @@
 const {pool} = require('../config_database/dataBase');
+const bcrypt = require('bcrypt');
 
 const readNote = async (req, res) => {
     try {
@@ -106,4 +107,55 @@ const deleteNote = async (req, res) => {
     }
 }
 
-module.exports = {createNote, readNote, updateNote, deleteNote};
+const readUser = async (req, res) => {
+    try {
+        const consulta = "SELECT * FROM users ORDER BY id ASC";
+
+        const resultado = await pool.query(consulta)
+
+        res.status(201).json({
+            "Details": "Read correctly",
+            "Response": resultado.rows
+        })
+
+    } catch (error) {
+        res.status(404).json({
+            "Error": error.message
+        })
+    }
+}
+
+const createUser = async (req, res) => {
+    try {
+        let {name, last_name, email, password } = req.body;
+                
+        if (!name || !last_name || !email || !password) {
+            res.status(400).json({
+                "Error": "Campos faltantes"
+            })
+        }
+
+        const PASSWORD = await bcrypt.hash(password, 10);
+
+        const consulta = `INSERT INTO users (name, last_name, email, password)
+                          VALUES ($1, $2, $3, $4) RETURNING *`;
+
+        const valores = [name, last_name, email, PASSWORD]
+
+        const resultado = await pool.query(consulta, valores)
+
+        res.status(201).json({
+            "Details": "User added correctly",
+            "response": resultado.rows[0]
+        })
+
+    } catch (error) {
+        res.status(404).json({
+            "Error": error.message,
+        })
+    }
+        
+
+}
+
+module.exports = {createNote, readNote, updateNote, deleteNote, readUser, createUser};

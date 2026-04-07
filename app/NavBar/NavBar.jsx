@@ -12,7 +12,6 @@ import { useRouter, usePathname } from 'next/navigation'
 import { useState } from 'react'
 
 export default function NavBar(){
-    const [input, setInput] = useState('')
     const router = useRouter()
     const pathName = usePathname()
 
@@ -35,7 +34,7 @@ export default function NavBar(){
                 <div className={styles.imagens_navbar}>
                     <Image src={cuadritos} width={60} height={60} alt='Cuadritos de decoracion'/>
                     <Image src={notificacion} width={60} height={60} alt='Notificacion de decoracion'/>
-                    <Image src={foto_perfil} width={60} height={60} alt='Foto de perfil'/>
+                    <Image onClick={() => router.push('/SignUp')} title='Log in/Sign up' style={{cursor: 'pointer'}} src={foto_perfil} width={60} height={60} alt='Foto de perfil'/>
                 </div>
             </div>
         </>
