@@ -29,6 +29,7 @@ function OpenThreeDots ({ id }) {
                 setOptionDelete(!optionDelete)
             }}>...</h2>
             {optionDelete ?  <h6 onClick={(e) => {
+                location.reload()
                 router.refresh()
                 setOptionDelete(!optionDelete)
                 e.stopPropagation()

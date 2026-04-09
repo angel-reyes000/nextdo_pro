@@ -1,16 +1,17 @@
 const {pool} = require('../config_database/dataBase');
 const bcrypt = require('bcrypt');
+const jsonwebtoken = require('jsonwebtoken');
 
 const readNote = async (req, res) => {
     try {
-        const consulta = "SELECT * FROM note ORDER BY id ASC";
-        const resultado = await pool.query(consulta)
+        const consulta = "SELECT * FROM note WHERE user_id = $1";
+        const resultado = await pool.query(consulta, [req.user.id])
         res.json({
             "response": resultado.rows
         })
     } catch (error) {
         res.status(500).json({
-            "error": error.message
+            "Error": error.message
         })
     }
 }
@@ -19,8 +20,7 @@ const createNote = async (req, res) => {
     try {
         let {title, description, deadline, priority} = req.body;
 
-        today_date = new Date().toLocaleDateString()
-        pass = true;
+        let today_date = new Date().toLocaleDateString()
 
             if (!title) {
                 title = "NA"
@@ -36,9 +36,9 @@ const createNote = async (req, res) => {
             } 
 
 
-        const consulta = "INSERT INTO note (title, description, deadline, priority) VALUES ($1, $2, $3, $4)";
+        const consulta = "INSERT INTO note (user_id, title, description, deadline, priority) VALUES ($1, $2, $3, $4, $5)";
 
-        const valores = [title, description, deadline, priority];
+        const valores = [req.user.id, title, description, deadline, priority];
 
         const resultado = await pool.query(consulta, valores)
 
@@ -130,17 +130,17 @@ const createUser = async (req, res) => {
         let {name, last_name, email, password } = req.body;
                 
         if (!name || !last_name || !email || !password) {
-            res.status(400).json({
+            return res.status(400).json({
                 "Error": "Campos faltantes"
             })
         }
 
-        const PASSWORD = await bcrypt.hash(password, 10);
+        const hashedPassword = await bcrypt.hash(password, 10);
 
         const consulta = `INSERT INTO users (name, last_name, email, password)
                           VALUES ($1, $2, $3, $4) RETURNING *`;
 
-        const valores = [name, last_name, email, PASSWORD]
+        const valores = [name, last_name, email, hashedPassword]
 
         const resultado = await pool.query(consulta, valores)
 
@@ -158,4 +158,72 @@ const createUser = async (req, res) => {
 
 }
 
-module.exports = {createNote, readNote, updateNote, deleteNote, readUser, createUser};
+const getLogin = async (req, res) => {
+    return res.send("Log in")
+}
+
+const postLogIn = async (req, res) => {
+    const { email, password } = req.body;
+
+    if (!email || !password) {
+        return res.status(400).json({
+            "Error": "Empty fields or incorrect data"
+        });
+    }
+
+    const consulta = "SELECT * FROM users WHERE email = $1";
+
+    const resultado = await pool.query(consulta, [email]);
+
+    const user = resultado.rows[0];
+
+    if (!user) {
+        return res.status(400).json({
+            "Error": "Incorrect data"
+        })
+    }
+
+    const validPassword = await bcrypt.compare(password, user.password);
+
+    if (!validPassword) {
+        return res.status(400).json({
+            "Error": "Incorrect password"
+        })
+    }
+
+    const token = jsonwebtoken.sign(
+        { id: user.id },
+        process.env.SECRET,
+        { expiresIn: "1h"}
+    );
+
+    return res.status(200).json({
+        message: "Correct Login",
+        userID: user.id,
+        token: token
+    })
+
+}
+
+const auth = async (req, res, next) => {    
+    try {
+        const token = req.headers.authorization;
+        console.log("token recibido", token)
+
+        if (!token) return res.status(404).json({"Error": "Token no valid"});
+
+        const decoded = jsonwebtoken.verify(token, process.env.SECRET);
+
+        req.user = decoded;
+
+        next()
+
+    } catch (error) {
+        res.status(400).json({
+            "Error": error.message
+        })
+    }
+}
+
+
+module.exports = {createNote, readNote, updateNote, deleteNote, readUser, createUser, postLogIn, getLogin, auth};

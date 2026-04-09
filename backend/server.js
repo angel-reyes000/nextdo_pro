@@ -1,7 +1,7 @@
 const express = require('express');
 const cors = require('cors')
 const {pool, crearConexion} = require('./config_database/dataBase')
-const { createNote, readNote, updateNote, deleteNote, readUser, createUser } = require('./config_controllers/controllers')
+const { createNote, readNote, updateNote, deleteNote, readUser, createUser, postLogIn, getLogin, auth } = require('./config_controllers/controllers')
 
 const app = express()
 app.use(express.json())
@@ -13,13 +13,16 @@ app.get('/', (req, res) => {
     })
 })
 
-app.get('/api/notes', readNote);
-app.post('/api/notes', createNote);
+app.get('/api/notes', auth, readNote);
+app.post('/api/notes', auth, createNote);
 app.put('/api/notes', updateNote);
 app.delete('/api/notes', deleteNote);
 
 app.get('/api/users', readUser);
 app.post('/api/users', createUser);
+
+app.get('/api/login', getLogin)
+app.post('/api/login', postLogIn);
 
 const startServer = async () => {
     try {

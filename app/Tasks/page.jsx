@@ -6,6 +6,7 @@ import { FaPlus, FaCalendar, FaSearch, FaTimes, FaSave } from 'react-icons/fa'
 import { useState, useRef, useEffect } from 'react'
 import Task from './task_searcher_and_filter.jsx'
 import Task_edit from './task_edit.jsx'
+import { refresh } from 'next/cache.js'
 
 let ids = 0;
 let list_tasks = []
@@ -69,31 +70,43 @@ export default function Tasks () {
 
     useEffect(() => { 
         const getData = async () => {
+            const token = localStorage.getItem('token');
             try {
-                const res = await fetch(`http://localhost:${process.env.NEXT_PUBLIC_PORT}/api/notes`);
+                const res = await fetch(`http://localhost:${process.env.NEXT_PUBLIC_PORT}/api/notes`, {
+                    headers: {
+                        'Authorization': token
+                    }
+                });
                 const data = await res.json();
-                setTasks(data.response)
+                setTasks(data.response || [])
             } catch (error) {
                 console.error("Error al obtener datos");    
+                setTasks([])
             }
         }
-        getData();
-    }, [tasks]);
+        getData()
+    }, []);
 
     async function sendTaskDataBase () {
-        const db = await fetch(`http://localhost:${process.env.NEXT_PUBLIC_PORT}/api/notes`, {
-            method: "POST",
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-                id: fieldId,
-                title: inputCreateTask,
-                description: inputCreateDescriptionTask,
-                deadline: inputCreateDeadLineTask,
-                priority: priorityStateButton
+        try {
+            const res = await fetch(`http://localhost:${process.env.NEXT_PUBLIC_PORT}/api/notes`, {
+                method: "POST",
+                headers: {
+                    'Authorization': localStorage.getItem('token'),
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    id: fieldId,
+                    title: inputCreateTask,
+                    description: inputCreateDescriptionTask,
+                    deadline: inputCreateDeadLineTask,
+                    priority: priorityStateButton
+                })
             })
-        })
+        } catch (error) {
+            console.error("Error guardando tarea:", error);
+        }
+
     }
 
     return (

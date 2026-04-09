@@ -1,4 +1,4 @@
-.window_sign_up {
+.window_log_in {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -6,7 +6,7 @@
     height: 100%;
 }
 
-.container_sign_up {
+.container_log_in {
     display: grid;
     grid-template-rows: auto 2fr;
     width: 50%;
@@ -14,7 +14,7 @@
     margin-top: 2%;
 }
 
-.seccions_sign_up {
+.seccions_log_in {
     display: grid;
     grid-template-columns: 1fr 1fr;
     font-size: 150%;
@@ -22,7 +22,7 @@
     background: linear-gradient(to top, rgb(177, 239, 255), rgb(197, 236, 253), rgba(0, 0, 0, 0));
 }
 
-.seccion_sign_up_log_in {
+.seccion_log_in_log_in {
     text-align: center;
     height: 100%;
     width: 100%;
@@ -30,7 +30,7 @@
     cursor: pointer;
 }
 
-.seccion_sign_up_sign_up {
+.seccion_log_in_sign_up {
     text-align: center;
     height: 100%;
     width: 100%;
@@ -40,7 +40,7 @@
     cursor: pointer;
 }
 
-.form_sign_up {
+.form_log_in {
     display: grid;
     grid-template-columns: 1fr 1fr;
     grid-template-rows: auto auto auto;
@@ -49,7 +49,7 @@
     padding: 5%;
 }
 
-.header_sign_up {
+.header_log_in {
     grid-column: 1/3;
     grid-row: 1/2;
     margin-bottom: 2%;
@@ -63,14 +63,15 @@
     }
 }
 
-.form_questionary_sign_up {
+.form_questionary_log_in {
     grid-column: 1/2;
     grid-row: 2/4;
 }
 
-.inputs_sign_up {
+.inputs_log_in {
     display: flex;
     flex-wrap: wrap;
+    margin-bottom: 5%;
     label {
         font-size: 100%;
         color: rgb(194, 194, 194);
@@ -94,14 +95,6 @@
     }
 }
 
-.inputs_name_last_name_sign_up {
-    display: flex;
-    justify-content: space-between;
-    gap: 5%;
-    width: auto;
-    margin-bottom: 0%;
-}
-
 .email_password_sign_in {
     display: grid;
     gap: 0%;
@@ -110,7 +103,7 @@
     margin-bottom: 10%;
 }
 
-.button_sign_up {
+.button_log_in {
     width: 100%;
     height: 100%;
     button {
@@ -134,7 +127,7 @@ button:active {
     transform: scale(0.95);
 }
 
-.continue_with_sign_up {
+.continue_with_log_in {
     display: flex;
     text-align: center;
     justify-content: center;
@@ -171,7 +164,7 @@ button:active {
     cursor: pointer;
 }
 
-.portada_sign_up {
+.portada_log_in {
     display: flex;
     justify-content: center;
     align-items: center;
