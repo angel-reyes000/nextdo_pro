@@ -110,12 +110,58 @@
     }
 }
 
-.imagens_navbar {
+.log_out_navbar {
     display: flex;
     justify-content: end;
     align-items: center;
     gap: 2%;
     margin-right: 5%;
+}
+
+.log_out_container {
+    display: block;
+    justify-items: center;
+    align-content: center;
+    font-size: clamp(0.8rem, 1rem, 1.2rem);
+    font-weight: 500;
+}
+
+.modal_card_log_out {
+    margin: auto;
+    width: 25%;
+    border-radius: 10px;
+    border: 0px ridge black;
+    background-color: rgb(214, 214, 214);
+}
+
+.modal_log_out {
+    height: 100%;
+    width: 100%;
+    font-size: 120%;
+    padding: 5%;
+}
+
+.modal_text_log_out {
+    margin-bottom: 5%;
+    font-weight: 500;
+}
+
+.modal_buttons_log_out {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin: 0%;
+    gap: 2%;
+    button {
+        width: 100%;
+        border-radius: 5px;
+        font-weight: 500;
+        border: 2px solid gray;
+        color: rgb(70, 70, 255);
+    }
+    button:hover {
+        background-color: rgb(178, 178, 178);
+    }
 }
 
 @media screen and (max-width: 800px) {

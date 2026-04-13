@@ -3,17 +3,49 @@
 import styles from '../styles/NavBar.module.scss'
 import Image from 'next/image'
 import Logo from '../../public/assets/NavBar_images/logo nextdo pro navbar.png'
-import cuadritos from '../../public/assets/NavBar_images/cuadraditos navbar nextdopro.png'
-import notificacion from '../../public/assets/NavBar_images/simbolo de notificacion navbar nextdopro.png'
-import foto_perfil from '../../public/assets/NavBar_images/foto de perfil nextdo pro navbar.png'
 import lupa from '../../public/assets/NavBar_images/search navbar nextdo pro.png'
+import image_log_out from '../../public/assets/NavBar_images/logout_nextdopro.png';
 import { FaSearch } from 'react-icons/fa'
 import { useRouter, usePathname } from 'next/navigation'
-import { useState } from 'react'
+import { useState, useRef, useEffect } from 'react'
 
 export default function NavBar(){
-    const router = useRouter()
-    const pathName = usePathname()
+    const router = useRouter();
+    const pathName = usePathname();
+    const [openLogout, setOpenLogout] = useState(false);
+
+    function Log_out () {
+        const logoutRef = useRef(null);
+        const router = useRouter();
+    
+        useEffect(() => {
+            logoutRef.current.showModal()
+        }, []);
+
+        return (
+            <>
+                <dialog ref={logoutRef} className={styles.modal_card_log_out}>
+                    <div className={styles.modal_log_out}>
+                        <div className={styles.modal_text_log_out}>
+                            <p>Are you sure you want to log out?</p>
+                        </div>
+                        <div className={styles.modal_buttons_log_out}>
+                            <button onClick={() => {
+                                localStorage.removeItem('token');
+                                router.push('/LogIn');
+                                logoutRef.current.close();
+                                setOpenLogout(false)
+                                }} value='yes'>Yes</button>
+                            <button onClick={() => {
+                                logoutRef.current.close();
+                                setOpenLogout(false)
+                                }} value='no'>No</button>
+                        </div>
+                    </div>
+                </dialog>
+            </>
+        )
+    }
 
     return (
         <>
@@ -28,14 +60,19 @@ export default function NavBar(){
                     </div>
                     <div className={styles.write_search}>
                         <p>NextDo PRO, Welcome!<span className={styles.stick_move}>|</span></p>
-                    </div>
-                    
+                    </div>                    
                 </div>
-                <div className={styles.imagens_navbar}>
-                    <Image src={cuadritos} width={60} height={60} alt='Cuadritos de decoracion'/>
-                    <Image src={notificacion} width={60} height={60} alt='Notificacion de decoracion'/>
-                    <Image onClick={() => router.push('/SignUp')} title='Log in/Sign up' style={{cursor: 'pointer'}} src={foto_perfil} width={60} height={60} alt='Foto de perfil'/>
-                </div>
+                {pathName !== '/LogIn' && pathName !== '/SignUp' && pathName !== '/' ? (
+                    <div onClick={() => {
+                        setOpenLogout(true)
+                        
+                        }} className={styles.log_out_navbar}>
+                        <div className={styles.log_out_container}>
+                        <Image src={image_log_out} width={50} height={50} alt='image log out' />
+                            <p>Log out</p> 
+                        </div>                    
+                    </div>) : ''}
+                    {openLogout && <Log_out />}
             </div>
         </>
     )
