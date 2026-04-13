@@ -1,7 +1,7 @@
 "use client"
 
 import { useState, useEffect } from 'react';
-import { useRouter } from 'next/navigation';
+import { useRouter, usePathname } from 'next/navigation';
 import styles from '../styles/signUp.module.scss';
 import cover from '../../public/assets/Sign_in_images/Diseño_portada_login_signup_nextdo_pro_gemini-removebg-preview.png';
 import image_google from '../../public/assets/Sign_in_images/Icono google sin fondo.png';
@@ -17,7 +17,8 @@ export default function SignUp () {
     const [password, setPassword] = useState('');
     const [errorSignUp, setErrorSignUp] = useState(false);
     const [messageError, setMessageError] = useState('');
-    const router = useRouter()
+    const router = useRouter();
+    const pathName = usePathname();
 
     useEffect(() => {AOS.init({
         duration: 1000,
@@ -51,7 +52,7 @@ export default function SignUp () {
             router.push('/LogIn')
         }
     }
-
+ 
     return (
         <>
             <div data-aos="zoom-in" className={styles.window_sign_up}>
@@ -60,7 +61,7 @@ export default function SignUp () {
                         <div className={styles.seccion_sign_up_log_in} onClick={() => router.push('/LogIn')}>
                             <h2>Log in</h2>
                         </div>
-                        <div className={styles.seccion_sign_up_sign_up}>
+                        <div className={styles.seccion_sign_up_sign_up} >
                             <h2>Sign up</h2>
                         </div>
                     </div>

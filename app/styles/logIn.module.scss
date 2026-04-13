@@ -27,6 +27,8 @@
     height: 100%;
     width: 100%;
     padding: 2%;
+    background-color: white;
+    clip-path: polygon(90% 0%, 0% 0%, 0% 100%, 100% 100%);
     cursor: pointer;
 }
 
@@ -34,9 +36,7 @@
     text-align: center;
     height: 100%;
     width: 100%;
-    clip-path: polygon(100% 0%, 10% 0%, 0% 100%, 100% 100%);
     padding: 2%;
-    background-color: white;
     cursor: pointer;
 }
 
