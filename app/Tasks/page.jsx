@@ -75,6 +75,7 @@ export default function Tasks () {
 
     function activeDialog ({ bool }) {
         setExpiredToken(bool)
+        localStorage.removeItem('token');
     }
 
     useEffect(() => { 
