@@ -1,7 +1,7 @@
 const express = require('express');
 const cors = require('cors')
 const {pool, crearConexion} = require('./config_database/dataBase')
-const { createNote, readNote, updateNote, deleteNote, readUser, createUser, postLogIn, getLogin, auth } = require('./config_controllers/controllers')
+const { createNote, readNote, updateNote, deleteNote, readUser, createUser, postLogIn, getLogin, auth, postGoogle } = require('./config_controllers/controllers')
 
 const app = express()
 app.use(express.json())
@@ -23,6 +23,8 @@ app.post('/api/users', createUser);
 
 app.get('/api/login', getLogin)
 app.post('/api/login', postLogIn);
+
+app.post('/auth/google', postGoogle);
 
 const startServer = async () => {
     try {

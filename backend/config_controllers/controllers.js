@@ -1,6 +1,8 @@
 const {pool} = require('../config_database/dataBase');
 const bcrypt = require('bcrypt');
 const jsonwebtoken = require('jsonwebtoken');
+const { OAuth2Client } = require('google-auth-library')
+const crypto = require('crypto');
 
 const readNote = async (req, res) => {
     try {
@@ -225,5 +227,62 @@ const auth = async (req, res, next) => {
     }
 }
 
+const client = new OAuth2Client(process.env.NEXT_PUBLIC_GOOGLE_CLIENT)
 
-module.exports = {createNote, readNote, updateNote, deleteNote, readUser, createUser, postLogIn, getLogin, auth};
+const postGoogle = async (req, res) => {
+    try {
+        const { token: googleToken } = req.body;
+
+        if (!googleToken) {
+            return res.status(400).json({ "Error": "Token no recibido" });
+        }
+
+        const ticket = await client.verifyIdToken({
+            idToken: googleToken,
+            audience: process.env.NEXT_PUBLIC_GOOGLE_CLIENT
+        });
+
+        const payload = ticket.getPayload();
+
+        const checkUser = await pool.query(
+            "SELECT * FROM users WHERE email = $1", 
+            [payload.email]
+        );
+
+        let userId;
+
+        if (checkUser.rows.length > 0) {
+            userId = checkUser.rows[0].id;
+        } else {
+            const consulta = `
+                INSERT INTO users (name, last_name, email, password)
+                VALUES ($1, $2, $3, $4) RETURNING *;
+            `;
+
+            const createPassword = crypto.randomBytes(32).toString('hex');
+            const hashedPassword = bcrypt.hash(createPassword, 10);
+
+            const resultado = await pool.query(consulta, [
+                payload.given_name || payload.name,
+                payload.family_name || 'Google',
+                payload.email,
+                hashedPassword
+            ]);
+            userId = resultado.rows[0].id;
+        }
+
+        const jwtToken = jsonwebtoken.sign(
+            { id: userId },
+            process.env.SECRET,
+            { expiresIn: "1h" }
+        );
+
+        res.status(200).json({ token: jwtToken });
+
+    } catch (error) {
+        console.error("Error en postGoogle:", error.message);
+        res.status(400).json({ "Error": error.message });
+    }
+};
+
+module.exports = {createNote, readNote, updateNote, deleteNote, readUser, createUser, postLogIn, getLogin, auth, postGoogle};
