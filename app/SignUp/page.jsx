@@ -6,7 +6,7 @@ import styles from '../styles/signUp.module.scss';
 import cover from '../../public/assets/Sign_in_images/Diseño_portada_login_signup_nextdo_pro_gemini-removebg-preview.png';
 import image_google from '../../public/assets/Sign_in_images/Icono google sin fondo.png';
 import image_apple from '../../public/assets/Sign_in_images/Icono apple sin fondo.png';
-import { Googlelogin, GoogleOAuthProvider } from '@react-oauth/google'; 
+import { GoogleLogin, GoogleOAuthProvider } from '@react-oauth/google'; 
 import Image from 'next/image';
 import AOS from "aos";
 import "aos/dist/aos.css";
@@ -125,7 +125,7 @@ export default function SignUp () {
                                 <div className={styles.google_apple_images}>
                                     <div className={styles.container_image_google}>
                                         <GoogleOAuthProvider clientId={process.env.NEXT_PUBLIC_GOOGLE_CLIENT}>
-                                            <Googlelogin onSuccess={submitGoogle} onError={() => console.log("Error en inicio con google")}/>
+                                            <GoogleLogin onSuccess={submitGoogle} onError={() => console.log("Error en inicio con google")}/>
                                         </GoogleOAuthProvider>
                                     </div>
                                 </div>

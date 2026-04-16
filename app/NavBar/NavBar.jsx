@@ -32,7 +32,7 @@ export default function NavBar(){
                         <div className={styles.modal_buttons_log_out}>
                             <button onClick={() => {
                                 localStorage.removeItem('token');
-                                router.push('/LogIn');
+                                router.push('/login');
                                 logoutRef.current.close();
                                 setOpenLogout(false)
                                 }} value='yes'>Yes</button>
