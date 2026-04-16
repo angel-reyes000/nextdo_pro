@@ -55,8 +55,6 @@ export default function SignUp () {
     }
 
     const submitGoogle = async (credentialResponse) => {
-        console.log(process.env.NEXT_PUBLIC_GOOGLE_CLIENT)
-        console.log("ACTIVOOOOOOOOOOOO")
         const res = await fetch('http://localhost:4000/auth/google', {
             method: 'POST',
             headers: {

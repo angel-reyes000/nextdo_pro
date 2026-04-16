@@ -68,7 +68,7 @@ export default function NavBar(){
                         
                         }} className={styles.log_out_navbar}>
                         <div className={styles.log_out_container}>
-                        <Image src={image_log_out} width={50} height={50} alt='image log out' />
+                            <Image src={image_log_out} width={50} height={50} alt='image log out' />
                             <p>Log out</p> 
                         </div>                    
                     </div>) : ''}

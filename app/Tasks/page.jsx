@@ -171,7 +171,7 @@ export default function Tasks () {
                             </div>
                         ) : null}
                     </div>
-                    <hr style={{margin: '1% 0% 1% 0%', border: '3px solid rgb(208, 208, 208)', width: '100%', borderRadius: '10px'}} />
+                    <hr />
                     {/* -------------------------- Filtros y busqueda -------------------------------- */}
                     <div className={styles.filters_and_search}>
                         <div className={styles.input_filters_and_search}>
