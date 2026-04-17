@@ -2,8 +2,8 @@
     display: flex;
     justify-content: center;
     position: absolute;
-    background-color: rgba(100, 100, 100, 0.5);
-    width: 100%;
+    //background-color: rgba(100, 100, 100, 0.5);
+    width: 100dvw;
     height: 100%;
     z-index: 30;
 }
@@ -12,23 +12,32 @@
     display: grid;
     grid-template-rows: auto auto 2fr 1fr 1fr;
     margin-top: 2%;
-    height: 70%;
-    width: 50%;
-    background-color: white;
+    height: 70dvh;
+    width: auto;
+    background-color: rgb(255, 255, 255);
+    border: 10px double black;
     position: fixed;
     padding: 2%;
     border-radius: 20px;
+    hr {
+        background-color: black;
+        border: 2px solid black;
+        width: 100%;
+    }
 }
 
 .edit_header {
     display: flex;
     justify-content: space-between;
-    width: 100%;
-    height: 10%;
+    height: 6dvh;
     margin-bottom: 1%;
     button {
         height: auto;
         cursor: pointer;
+    }
+
+    button:hover {
+        background-color: white;
     }
 }
 
@@ -42,9 +51,12 @@
         font-weight: 600;
     }
     input {
-        background-color: rgba(226, 226, 226, 1);
         border-radius: 10px;
         padding-left: 2%;
+        width: 100%;
+    }
+    input:focus {
+        outline: 0px solid black;
     }
 }
 
@@ -52,16 +64,14 @@
     display: grid;
     grid-template-rows: auto auto;
     align-content: start;
-    width: auto;
-    height: 100%;
     h2 {
         font-size: 150%;
         font-weight: 600;
     }
     textarea {
         width: auto;
-        height: 170px;
         padding: 1%;
+        height: 21dvh;
         resize: none;
     }
 }
@@ -73,8 +83,9 @@
     font-size: 130%;
     gap: 10%;
     label {
-        width: 100%;
-        margin-right: 100%;
+        display: block;
+        width: 10dvw;
+        margin-right: 0%;
         font-weight: 600;
     }
 
@@ -83,14 +94,13 @@
 .edit_date {
     display: block;
     flex-wrap: wrap;
-    width: 100%;
 }
 
 .edit_priority {
     display: block;
     grid-template-rows: auto auto;
     gap: 0%;
-    width: 100%;
+    width: 21dvw;
 }
 
 .edit_save_and_close {
@@ -99,25 +109,45 @@
     align-items: end;
     color: white;
     font-size: 120%;
-    width: 100%;
     font-weight: 600;
 }
 
 .edit_button_close {
     text-align: center;
     background-color: red;
-    width: 20%;
-    height: 30%;
+    padding: 0% 5% 0% 5%;
     border-radius: 5px;
+    cursor: pointer;
+    button {
+        cursor: pointer;
+    }
 }
 
 .edit_button_save {
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: rgb(84, 90, 255);
-    width: 20%;
-    height: 30%;
+    background-color: green;
+    padding: 0% 5% 0% 5%;
     border-radius: 5px;
     margin-left: 2%;
+    cursor: pointer;
+    button {
+        cursor: pointer;
+    }
+}
+
+@media screen and (max-width: 800px) {
+    .card_edit {
+        margin-top: 5%;
+        width: 90dvw;
+        height: 85dvh;
+        max-width: 90dvw;
+        overflow-x: auto;
+    }
+    .edit_header {
+        input {
+            width: 90%;
+        }
+    }
 }

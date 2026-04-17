@@ -41,12 +41,24 @@ function OpenThreeDots ({ id }) {
 
 export default function Task ({ tasks, inputSearchTask, selectPriority, selectDeadLine, onSelectTask }) {
 
+    function Warning () {
+        const token = localStorage.getItem('token');
+        if (token === undefined  || token === null) {
+            return (
+                <div className={styles.warning_login}>
+                    <p>Log in for save your tasks!</p>
+                </div>
+            )
+        }
+    }
+
     if (tasks.length === 0) {
         return (
             <>
                 <div className={styles.empty_tasks}>
                     <FaPlus style={{display: 'flex', justifyContent: 'center', alignItems: 'center'}}/><h1> Create a task!</h1>
                 </div>
+                <Warning />
             </>
         )
     }
@@ -57,7 +69,7 @@ export default function Task ({ tasks, inputSearchTask, selectPriority, selectDe
                 {tasks.filter(copia => copia.title.toLowerCase().includes(inputSearchTask.toLowerCase())).sort((primero, segundo) => new Date(primero.deadline) - new Date(segundo.deadline)).map((task) => (
                     <div key={task.id} className={styles.tasks} style={{borderLeft: `7px solid ${task.priority === 'high' ? 'red' : task.priority === 'medium' ? 'yellow' : 'green'}`}}>
                         <div className={styles.tasks_checkbox}>
-                            <input type="checkbox"></input>
+                            <input type="checkbox" onClick={(e) => e.stopPropagation()}></input>
                         </div>
                         <div className={styles.information_tasks}>
                             <div className={styles.header_tasks}>
@@ -82,7 +94,7 @@ export default function Task ({ tasks, inputSearchTask, selectPriority, selectDe
                 {tasks.sort((primero, segundo) => new Date(primero.deadline) - new Date(segundo.deadline)).map((task) => (
                     <div key={task.id} onClick={() => onSelectTask(task)} className={styles.tasks} style={{borderLeft: `7px solid ${task.priority === 'high' ? 'red' : task.priority === 'medium' ? 'yellow' : 'green'}`}}>
                         <div className={styles.tasks_checkbox}>
-                            <input type="checkbox"></input>
+                            <input type="checkbox" onClick={(e) => e.stopPropagation()}></input>
                         </div>
                         <div className={styles.information_tasks}>
                             <div className={styles.header_tasks}>
@@ -107,7 +119,7 @@ export default function Task ({ tasks, inputSearchTask, selectPriority, selectDe
                 {tasks.sort((primero, segundo) => new Date(segundo.deadline) - new Date(primero.deadline)).map((task) => (
                     <div key={task.id} className={styles.tasks} style={{borderLeft: `7px solid ${task.priority === 'high' ? 'red' : task.priority === 'medium' ? 'yellow' : 'green'}`}}>
                         <div className={styles.tasks_checkbox}>
-                            <input type="checkbox"></input>
+                            <input type="checkbox" onClick={(e) => e.stopPropagation()}></input>
                         </div>
                         <div className={styles.information_tasks}>
                             <div className={styles.header_tasks}>
@@ -132,7 +144,7 @@ export default function Task ({ tasks, inputSearchTask, selectPriority, selectDe
                 {tasks.filter(copia => copia.title.toLowerCase().includes(inputSearchTask.toLowerCase())).sort((primero, segundo) => new Date(primero.deadline) - new Date(segundo.deadline)).filter(copia => copia.priority === 'high').map((task) => (
                     <div key={task.id} className={styles.tasks} style={{borderLeft: `7px solid ${task.priority === 'high' ? 'red' : task.priority === 'medium' ? 'yellow' : 'green'}`}}>
                         <div className={styles.tasks_checkbox}>
-                            <input type="checkbox"></input>
+                            <input type="checkbox" onClick={(e) => e.stopPropagation()}></input>
                         </div>
                         <div className={styles.information_tasks}>
                             <div className={styles.header_tasks}>
@@ -157,7 +169,7 @@ export default function Task ({ tasks, inputSearchTask, selectPriority, selectDe
                 {tasks.filter(copia => copia.title.toLowerCase().includes(inputSearchTask.toLowerCase())).sort((primero, segundo) => new Date(segundo.deadline) - new Date(primero.deadline)).filter(copia => copia.priority === 'high').map((task) => (
                     <div key={task.id} className={styles.tasks} style={{borderLeft: `7px solid ${task.priority === 'high' ? 'red' : task.priority === 'medium' ? 'yellow' : 'green'}`}}>
                         <div className={styles.tasks_checkbox}>
-                            <input type="checkbox"></input>
+                            <input type="checkbox" onClick={(e) => e.stopPropagation()}></input>
                         </div>
                         <div className={styles.information_tasks}>
                             <div className={styles.header_tasks}>
@@ -182,7 +194,7 @@ export default function Task ({ tasks, inputSearchTask, selectPriority, selectDe
                 {tasks.filter(copia => copia.title.toLowerCase().includes(inputSearchTask.toLowerCase())).sort((primero, segundo) => new Date(primero.deadline) - new Date(segundo.deadline)).filter(copia => copia.priority === 'medium').map((task) => (
                     <div key={task.id} className={styles.tasks} style={{borderLeft: `7px solid ${task.priority === 'high' ? 'red' : task.priority === 'medium' ? 'yellow' : 'green'}`}}>
                         <div className={styles.tasks_checkbox}>
-                            <input type="checkbox"></input>
+                            <input type="checkbox" onClick={(e) => e.stopPropagation()}></input>
                         </div>
                         <div className={styles.information_tasks}>
                             <div className={styles.header_tasks}>
@@ -207,7 +219,7 @@ export default function Task ({ tasks, inputSearchTask, selectPriority, selectDe
                 {tasks.filter(copia => copia.title.toLowerCase().includes(inputSearchTask.toLowerCase())).sort((primero, segundo) => new Date(segundo.deadline) - new Date(primero.deadline)).filter(copia => copia.priority === 'medium').map((task) => (
                     <div key={task.id} className={styles.tasks} style={{borderLeft: `7px solid ${task.priority === 'high' ? 'red' : task.priority === 'medium' ? 'yellow' : 'green'}`}}>
                         <div className={styles.tasks_checkbox}>
-                            <input type="checkbox"></input>
+                            <input type="checkbox" onClick={(e) => e.stopPropagation()}></input>
                         </div>
                         <div className={styles.information_tasks}>
                             <div className={styles.header_tasks}>
@@ -232,7 +244,7 @@ export default function Task ({ tasks, inputSearchTask, selectPriority, selectDe
                 {tasks.filter(copia => copia.title.toLowerCase().includes(inputSearchTask.toLowerCase())).sort((primero, segundo) => new Date(primero.deadline) - new Date(segundo.deadline)).filter(copia => copia.priority === 'low').map((task) => (
                     <div key={task.id} className={styles.tasks} style={{borderLeft: `7px solid ${task.priority === 'high' ? 'red' : task.priority === 'medium' ? 'yellow' : 'green'}`}}>
                         <div className={styles.tasks_checkbox}>
-                            <input type="checkbox"></input>
+                            <input type="checkbox" onClick={(e) => e.stopPropagation()}></input>
                         </div>
                         <div className={styles.information_tasks}>
                             <div className={styles.header_tasks}>
@@ -257,7 +269,7 @@ export default function Task ({ tasks, inputSearchTask, selectPriority, selectDe
                 {tasks.filter(copia => copia.title.toLowerCase().includes(inputSearchTask.toLowerCase())).sort((primero, segundo) => new Date(segundo.deadline) - new Date(primero.deadline)).filter(copia => copia.priority === 'low').map((task) => (
                     <div key={task.id} className={styles.tasks} style={{borderLeft: `7px solid ${task.priority === 'high' ? 'red' : task.priority === 'medium' ? 'yellow' : 'green'}`}}>
                         <div className={styles.tasks_checkbox}>
-                            <input type="checkbox"></input>
+                            <input type="checkbox" onClick={(e) => e.stopPropagation()}></input>
                         </div>
                         <div className={styles.information_tasks}>
                             <div className={styles.header_tasks}>
@@ -282,7 +294,7 @@ export default function Task ({ tasks, inputSearchTask, selectPriority, selectDe
                 {tasks.sort((primero, segundo) => new Date(primero.deadline) - new Date(segundo.deadline)).filter(copia => copia.priority === 'high').map((task) => (
                     <div key={task.id} className={styles.tasks} style={{borderLeft: `7px solid ${task.priority === 'high' ? 'red' : task.priority === 'medium' ? 'yellow' : 'green'}`}}>
                         <div className={styles.tasks_checkbox}>
-                            <input type="checkbox"></input>
+                            <input type="checkbox" onClick={(e) => e.stopPropagation()}></input>
                         </div>
                         <div className={styles.information_tasks}>
                             <div className={styles.header_tasks}>
@@ -307,7 +319,7 @@ export default function Task ({ tasks, inputSearchTask, selectPriority, selectDe
                 {tasks.sort((primero, segundo) => new Date(segundo.deadline) - new Date(primero.deadline)).filter(copia => copia.priority === 'high').map((task) => (
                     <div key={task.id} className={styles.tasks} style={{borderLeft: `7px solid ${task.priority === 'high' ? 'red' : task.priority === 'medium' ? 'yellow' : 'green'}`}}>
                         <div className={styles.tasks_checkbox}>
-                            <input type="checkbox"></input>
+                            <input type="checkbox" onClick={(e) => e.stopPropagation()}></input>
                         </div>
                         <div className={styles.information_tasks}>
                             <div className={styles.header_tasks}>
@@ -332,7 +344,7 @@ export default function Task ({ tasks, inputSearchTask, selectPriority, selectDe
                 {tasks.sort((primero, segundo) => new Date(primero.deadline) - new Date(segundo.deadline)).filter(copia => copia.priority === 'medium').map((task) => (
                     <div key={task.id} className={styles.tasks} style={{borderLeft: `7px solid ${task.priority === 'high' ? 'red' : task.priority === 'medium' ? 'yellow' : 'green'}`}}>
                         <div className={styles.tasks_checkbox}>
-                            <input type="checkbox"></input>
+                            <input type="checkbox" onClick={(e) => e.stopPropagation()}></input>
                         </div>
                         <div className={styles.information_tasks}>
                             <div className={styles.header_tasks}>
@@ -357,7 +369,7 @@ export default function Task ({ tasks, inputSearchTask, selectPriority, selectDe
                 {tasks.sort((primero, segundo) => new Date(segundo.deadline) - new Date(primero.deadline)).filter(copia => copia.priority === 'medium').map((task) => (
                     <div key={task.id} className={styles.tasks} style={{borderLeft: `7px solid ${task.priority === 'high' ? 'red' : task.priority === 'medium' ? 'yellow' : 'green'}`}}>
                         <div className={styles.tasks_checkbox}>
-                            <input type="checkbox"></input>
+                            <input type="checkbox" onClick={(e) => e.stopPropagation()}></input>
                         </div>
                         <div className={styles.information_tasks}>
                             <div className={styles.header_tasks}>
@@ -382,7 +394,7 @@ export default function Task ({ tasks, inputSearchTask, selectPriority, selectDe
                 {tasks.sort((primero, segundo) => new Date(primero.deadline) - new Date(segundo.deadline)).filter(copia => copia.priority === 'low').map((task) => (
                     <div key={task.id} className={styles.tasks} style={{borderLeft: `7px solid ${task.priority === 'high' ? 'red' : task.priority === 'medium' ? 'yellow' : 'green'}`}}>
                         <div className={styles.tasks_checkbox}>
-                            <input type="checkbox"></input>
+                            <input type="checkbox" onClick={(e) => e.stopPropagation()}></input>
                         </div>
                         <div className={styles.information_tasks}>
                             <div className={styles.header_tasks}>
@@ -407,7 +419,7 @@ export default function Task ({ tasks, inputSearchTask, selectPriority, selectDe
                 {tasks.sort((primero, segundo) => new Date(segundo.deadline) - new Date(primero.deadline)).filter(copia => copia.priority === 'low').map((task) => (
                     <div key={task.id} className={styles.tasks} style={{borderLeft: `7px solid ${task.priority === 'high' ? 'red' : task.priority === 'medium' ? 'yellow' : 'green'}`}}>
                         <div className={styles.tasks_checkbox}>
-                            <input type="checkbox"></input>
+                            <input type="checkbox" onClick={(e) => e.stopPropagation()}></input>
                         </div>
                         <div className={styles.information_tasks}>
                             <div className={styles.header_tasks}>
@@ -432,7 +444,7 @@ export default function Task ({ tasks, inputSearchTask, selectPriority, selectDe
                 {tasks.filter(copia => copia.title.toLowerCase().includes(inputSearchTask.toLowerCase())).sort((primero, segundo) => new Date(segundo.deadline) - new Date(primero.deadline)).map((task) => (
                     <div key={task.id} className={styles.tasks} style={{borderLeft: `7px solid ${task.priority === 'high' ? 'red' : task.priority === 'medium' ? 'yellow' : 'green'}`}}>
                         <div className={styles.tasks_checkbox}>
-                            <input type="checkbox"></input>
+                            <input type="checkbox" onClick={(e) => e.stopPropagation()}></input>
                         </div>
                         <div className={styles.information_tasks}>
                             <div className={styles.header_tasks}>
@@ -457,7 +469,7 @@ export default function Task ({ tasks, inputSearchTask, selectPriority, selectDe
                 {tasks.map((task) => (
                     <div key={task.id} className={styles.tasks} style={{borderLeft: `7px solid ${task.priority === 'high' ? 'red' : task.priority === 'medium' ? 'yellow' : 'green'}`}}>
                         <div className={styles.tasks_checkbox}>
-                            <input type="checkbox"></input>
+                            <input type="checkbox" onClick={(e) => e.stopPropagation()}></input>
                         </div>
                         <div className={styles.information_tasks}>
                             <div className={styles.header_tasks}>

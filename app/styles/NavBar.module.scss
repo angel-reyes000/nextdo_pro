@@ -65,7 +65,7 @@
     
     p{
         animation-name: search_animation;
-        animation-duration: 10s;
+        animation-duration: 4s;
         animation-timing-function: linear;
         animation-delay: 0ms;
         animation-iteration-count: infinite;
@@ -73,7 +73,7 @@
         white-space: nowrap;
         color: rgb(111, 111, 111);
         display: inline;
-        max-width: 40%;
+        max-width: 70%;
     }
    
 }
@@ -114,8 +114,18 @@
     display: flex;
     justify-content: end;
     align-items: center;
-    gap: 2%;
+    gap: 20%;
     margin-right: 5%;
+}
+
+.login_signup_navbar {
+    display: block;
+    justify-items: center;
+    align-content: center;
+    font-size: clamp(0.8rem, 1rem, 1.2rem);
+    font-weight: 500;
+    cursor: pointer;
+    display: none;
 }
 
 .log_out_container {
@@ -167,23 +177,44 @@
 
 @media screen and (max-width: 800px) {
     .NavBar {
-        grid-template-columns: 1fr 2fr 1fr;
+        grid-template-columns: 1fr 3fr 1fr;
         gap: 10%;
     }
     .logo_titulo_navbar{
+        margin-left: 10%;
         .titulo_navbar{
-            font-size: 80%;
+            font-size: 70%;
         }
     }
     .search_navbar{
+        width: 100%;
         .fasearch {
             font-size: 0%;
+            width: 100%;
         }
     }
     .write_search {
+        width: 100%;
         p {
+            width: 100%;
             max-width: 100%;
-            animation-duration: 3s;
+        }
+    }
+    .log_out_container {
+        img {
+            width: 30px;
+        }
+        p {
+            display: none;
+        }
+    }
+    .login_signup_navbar {
+        display: block;
+        img {
+            width: 30px;
+        }
+        p {
+            display: none;
         }
     }
 }

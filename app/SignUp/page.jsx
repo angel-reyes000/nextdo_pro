@@ -5,7 +5,6 @@ import { useRouter, usePathname } from 'next/navigation';
 import styles from '../styles/signUp.module.scss';
 import cover from '../../public/assets/Sign_in_images/Diseño_portada_login_signup_nextdo_pro_gemini-removebg-preview.png';
 import image_google from '../../public/assets/Sign_in_images/Icono google sin fondo.png';
-import image_apple from '../../public/assets/Sign_in_images/Icono apple sin fondo.png';
 import { GoogleLogin, GoogleOAuthProvider } from '@react-oauth/google'; 
 import Image from 'next/image';
 import AOS from "aos";
@@ -50,13 +49,11 @@ export default function SignUp () {
             setErrorSignUp(true)
             setMessageError('Campos invalidos o faltantes')
         } else if (res.status == 200 || res.status == 201) {
-            router.push('/LogIn')
+            router.push('/login')
         }
     }
 
     const submitGoogle = async (credentialResponse) => {
-        console.log(process.env.NEXT_PUBLIC_GOOGLE_CLIENT)
-        console.log("ACTIVOOOOOOOOOOOO")
         const res = await fetch('http://localhost:4000/auth/google', {
             method: 'POST',
             headers: {
@@ -75,7 +72,7 @@ export default function SignUp () {
         const data = await res.json();
 
         localStorage.setItem('token', data.token);
-        router.push('/LogIn');
+        router.push('/');
     }
  
     return (
@@ -83,7 +80,7 @@ export default function SignUp () {
             <div data-aos="zoom-in" className={styles.window_sign_up}>
                 <div className={styles.container_sign_up}>
                     <div className={styles.seccions_sign_up}>
-                        <div className={styles.seccion_sign_up_log_in} onClick={() => router.push('/LogIn')}>
+                        <div className={styles.seccion_sign_up_log_in} onClick={() => router.push('/login')}>
                             <h2>Log in</h2>
                         </div>
                         <div className={styles.seccion_sign_up_sign_up} >

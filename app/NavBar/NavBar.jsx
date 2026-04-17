@@ -5,6 +5,7 @@ import Image from 'next/image'
 import Logo from '../../public/assets/NavBar_images/logo nextdo pro navbar.png'
 import lupa from '../../public/assets/NavBar_images/search navbar nextdo pro.png'
 import image_log_out from '../../public/assets/NavBar_images/logout_nextdopro.png';
+import image_login_signup from '../../public/assets/Sign_in_images/imagen _login_signup.png'
 import { FaSearch } from 'react-icons/fa'
 import { useRouter, usePathname } from 'next/navigation'
 import { useState, useRef, useEffect } from 'react'
@@ -32,7 +33,7 @@ export default function NavBar(){
                         <div className={styles.modal_buttons_log_out}>
                             <button onClick={() => {
                                 localStorage.removeItem('token');
-                                router.push('/LogIn');
+                                router.push('/login');
                                 logoutRef.current.close();
                                 setOpenLogout(false)
                                 }} value='yes'>Yes</button>
@@ -62,15 +63,12 @@ export default function NavBar(){
                         <p>NextDo PRO, Welcome!<span className={styles.stick_move}>|</span></p>
                     </div>                    
                 </div>
-                {pathName !== '/LogIn' && pathName !== '/SignUp' && pathName !== '/' ? (
-                    <div onClick={() => {
-                        setOpenLogout(true)
-                        
-                        }} className={styles.log_out_navbar}>
+                {pathName !== '/login' && pathName !== '/signup' && pathName !== '/' ? (
+                    <div onClick={() => {setOpenLogout(true)}} className={styles.log_out_navbar}>                         
                         <div className={styles.log_out_container}>
-                        <Image src={image_log_out} width={50} height={50} alt='image log out' />
-                            <p>Log out</p> 
-                        </div>                    
+                            <Image src={image_log_out} width={50} height={50} alt='image log out' />
+                            <p>Log out</p>
+                        </div>            
                     </div>) : ''}
                     {openLogout && <Log_out />}
             </div>

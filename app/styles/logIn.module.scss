@@ -171,3 +171,19 @@ button:active {
     grid-column: 2/3;
     grid-row: 2/4;
 }
+
+@media screen and (max-width: 800px) {
+    .container_log_in {
+        margin-top: 5%;
+        width: 90dvw;
+        height: 80dvh;
+    }
+
+    .form_log_in {
+        grid-template-columns: 1fr;
+    }
+
+    .portada_log_in {
+        display: none;
+    }
+}

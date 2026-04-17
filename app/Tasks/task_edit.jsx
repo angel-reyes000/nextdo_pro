@@ -2,7 +2,9 @@
 
 import styles from '../styles/task.edit.module.scss'
 import { FaTimes, FaSave } from 'react-icons/fa'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
+import AOS from 'aos';
+import 'aos/dist/aos.css';
 
 export default function Task_edit({ task, onClose, onSave }) {
     const [editID, setEditId] = useState(task.id)
@@ -10,6 +12,14 @@ export default function Task_edit({ task, onClose, onSave }) {
     const [editDescription, setEditDescription] = useState(task.description)
     const [editDeadline, setEditDeadline] = useState(task.deadline)
     const [editPriority, setEditPriority] = useState(task.priority)
+
+    useEffect(() => {
+        AOS.init({
+            duration: 1000,
+            delay: 0,
+            once: true,
+        })
+    })
 
     const handleSave = () => {
         onSave({
@@ -40,7 +50,7 @@ export default function Task_edit({ task, onClose, onSave }) {
 
     return (
         <div className={styles.backgorund_task_edit}>
-            <div className={styles.card_edit}>
+            <div data-aos='fade-up' className={styles.card_edit}>
                 <div className={styles.edit_header}>
                     <div className={styles.edit_title}>
                         <h1>Title: </h1>
@@ -48,7 +58,7 @@ export default function Task_edit({ task, onClose, onSave }) {
                     </div>
                     <button onClick={onClose}><FaTimes size={30}/></button>
                 </div>
-                <hr style={{backgroundColor: 'black', border: '2px solid black', width: '100%'}}/>
+                <hr />
                 <div className={styles.edit_description}>
                     <h2>Description:</h2>
                     <textarea value={editDescription} onChange={(e) => setEditDescription(e.target.value)} placeholder='Edit your description...'></textarea>

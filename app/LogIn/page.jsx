@@ -5,7 +5,6 @@ import { useRouter, usePathname } from 'next/navigation';
 import styles from '../styles/logIn.module.scss';
 import cover from '../../public/assets/Sign_in_images/Diseño_portada_login_signup_nextdo_pro_gemini-removebg-preview.png';
 import image_google from '../../public/assets/Sign_in_images/Icono google sin fondo.png';
-import image_apple from '../../public/assets/Sign_in_images/Icono apple sin fondo.png';
 import { GoogleLogin, GoogleOAuthProvider } from '@react-oauth/google';
 import Image from 'next/image'
 import AOS from "aos";
@@ -43,7 +42,7 @@ export default function Login () {
 
         if (res.status == 200 && data.token) {
             localStorage.setItem('token', data.token)
-            router.push('/Tasks')
+            router.push('/tasks')
         }else{
             alert('Error: ' + data.Error)
         }
@@ -64,7 +63,7 @@ export default function Login () {
         const data = await res.json()
 
         localStorage.setItem('token', data.token)
-        router.push('/Tasks')
+        router.push('/tasks')
     }
 
     return (
@@ -75,7 +74,7 @@ export default function Login () {
                         <div className={styles.seccion_log_in_log_in} >
                             <h2>Log in</h2>
                         </div>
-                        <div className={styles.seccion_log_in_sign_up} onClick={() => router.push('/SignUp')}>
+                        <div className={styles.seccion_log_in_sign_up} onClick={() => router.push('/signup')}>
                             <h2>Sign up</h2>
                         </div>
                     </div>

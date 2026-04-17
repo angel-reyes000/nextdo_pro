@@ -178,3 +178,18 @@ button:active {
     grid-column: 2/3;
     grid-row: 2/4;
 }
+
+@media screen and (max-width: 800px) {
+    .container_sign_up {
+        margin-top: 5%;
+        width: 90dvw;
+    }
+
+    .form_sign_up {
+        grid-template-columns: 1fr;
+    }
+
+    .portada_sign_up {
+        display: none;
+    }
+}
