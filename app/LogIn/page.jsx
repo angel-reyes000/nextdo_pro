@@ -27,7 +27,7 @@ export default function Login () {
     async function submit (e) {
         e.preventDefault();
 
-        const res = await fetch(`http://localhost:4000/api/login`, {
+        const res = await fetch(`${process.env.RUTE_BACKEND}/api/login`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
@@ -49,7 +49,7 @@ export default function Login () {
     }
 
     const submitGoogle = async (credentialResponse) => {
-        const res = await fetch('http://localhost:4000/auth/google', {
+        const res = await fetch(`${process.env.RUTE_BACKEND}/auth/google`, {
             method: 'POST',
             headers: {
                 "Content-Type": "application/json",
@@ -103,7 +103,7 @@ export default function Login () {
                                 </div>
                                 <div className={styles.google_apple_images}>
                                     <div className={styles.container_image_google}>
-                                        <GoogleOAuthProvider clientId={process.env.NEXT_PUBLIC_GOOGLE_CLIENT}>
+                                        <GoogleOAuthProvider clientId={process.env.GOOGLE_CLIENT}>
                                             <GoogleLogin onSuccess={submitGoogle} onError={() => console.log("Error de validacion")}/>
                                         </GoogleOAuthProvider>
                                     </div>
