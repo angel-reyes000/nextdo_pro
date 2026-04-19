@@ -31,7 +31,7 @@ export default function Task_edit({ task, onClose, onSave }) {
             priority: editPriority
         })
         const updateTaskDataBase = async () => {
-            const db = await fetch(`${process.env.RUTE_BACKEND}/api/notes`, {
+            const db = await fetch(`${process.env.NEXT_PUBLIC_RUTE_BACKEND}/api/notes`, {
                 method: "PUT",
                 headers: {
                     "Content-Type": "application/json"

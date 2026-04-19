@@ -10,7 +10,7 @@ function OpenThreeDots ({ id }) {
     const router = useRouter()
 
     const deleteTaskDataBase = async (e) => {
-        const db = await fetch(`${process.env.RUTE_BACKEND}`, {
+        const db = await fetch(`${process.env.NEXT_PUBLIC_RUTE_BACKEND}`, {
             method: "DELETE",
             headers: {
                 "Content-Type": "application/json"

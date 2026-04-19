@@ -82,7 +82,7 @@ export default function Tasks () {
         const getData = async () => {
             const token = localStorage.getItem('token');
             try {
-                const res = await fetch(`${process.env.RUTE_BACKEND}/api/notes`, {
+                const res = await fetch(`${process.env.NEXT_PUBLIC_RUTE_BACKEND}/api/notes`, {
                     headers: {
                         'Authorization': token
                     }
@@ -103,7 +103,7 @@ export default function Tasks () {
     async function sendTaskDataBase () {
         try {
             useEffect(async () => {
-                    const res = await fetch(`${process.env.RUTE_BACKEND}/api/notes`, {
+                    const res = await fetch(`${process.env.NEXT_PUBLIC_RUTE_BACKEND}/api/notes`, {
                     method: "POST",
                     headers: {
                         'Authorization': localStorage.getItem('token'),
