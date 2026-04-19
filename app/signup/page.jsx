@@ -28,7 +28,7 @@ export default function SignUp () {
 
     async function submit (e) {
         e.preventDefault();
-        const res = await fetch(`${process.env.NEXT_PUBLIC_RUTE_BACKEND}/api/users`, {
+        const res = await fetch(`https://${process.env.NEXT_PUBLIC_RUTE_BACKEND}/api/users`, {
             method: "POST",
             headers: {
                 "Authorization": process.env.NEXT_PUBLIC_SECRET,
@@ -54,7 +54,7 @@ export default function SignUp () {
     }
 
     const submitGoogle = async (credentialResponse) => {
-        const res = await fetch(` https://${process.env.NEXT_PUBLIC_RUTE_BACKEND}/auth/google`, {
+        const res = await fetch(`https://${process.env.NEXT_PUBLIC_RUTE_BACKEND}/auth/google`, {
             method: 'POST',
             headers: {
                 "Content-Type": "application/json",
