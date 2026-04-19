@@ -19,7 +19,6 @@ function OpenThreeDots ({ id }) {
                 id: id
             })
         })
-        deleteTaskDataBase()
     }
 
     return (
