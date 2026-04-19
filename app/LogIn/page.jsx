@@ -22,7 +22,7 @@ export default function Login () {
             delay: 0,
             once: true
         })
-    })
+    }, []);
 
     async function submit (e) {
         e.preventDefault();
