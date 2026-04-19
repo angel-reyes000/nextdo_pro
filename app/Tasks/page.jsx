@@ -82,7 +82,7 @@ export default function Tasks () {
 
     useEffect(() => { 
         const getData = async () => {
-            const token = localStorage.getItem('token');
+            const token = typeof window !== 'undefined' ? localStorage.getItem('token') : null;
             try {
                 const res = await fetch(`${process.env.NEXT_PUBLIC_RUTE_BACKEND}/api/notes`, {
                     headers: {
