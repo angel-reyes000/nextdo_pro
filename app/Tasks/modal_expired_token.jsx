@@ -12,6 +12,7 @@ export default function Modal () {
     const router = useRouter();
 
     useEffect(() => {
+        const token = typeof window !== 'undefined' ? localStorage.getItem('token') : null;
         if (token === undefined || token === null) {
             refDialog.current.showModal(), []
             return (
@@ -35,6 +36,6 @@ export default function Modal () {
             )
         }
     })
-    const token = localStorage.getItem('token')
+    
     
 }
