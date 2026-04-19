@@ -41,15 +41,21 @@ function OpenThreeDots ({ id }) {
 
 export default function Task ({ tasks, inputSearchTask, selectPriority, selectDeadLine, onSelectTask }) {
 
-    function Warning () {
-        const token = typeof window !== 'undefined' ? localStorage.getItem('token') : null;
-        if (token === undefined  || token === null) {
+    function Warning() {
+        const [showWarning, setShowWarning] = useState(false);
+
+        useEffect(() => {
+            const token = localStorage.getItem('token');
+                    if (!token) setShowWarning(true);
+                }, []);
+
+            if (!showWarning) return null;
+
             return (
                 <div className={styles.warning_login}>
                     <p>Log in for save your tasks!</p>
-                </div>
-            )
-        }
+                </div>    
+            ) 
     }
 
     if (tasks.length === 0) {
