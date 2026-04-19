@@ -54,7 +54,7 @@ export default function SignUp () {
     }
 
     const submitGoogle = async (credentialResponse) => {
-        const res = await fetch(`${process.env.NEXT_PUBLIC_RUTE_BACKEND}/auth/google`, {
+        const res = await fetch(` https://${process.env.NEXT_PUBLIC_RUTE_BACKEND}/auth/google`, {
             method: 'POST',
             headers: {
                 "Content-Type": "application/json",

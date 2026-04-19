@@ -84,7 +84,7 @@ export default function Tasks () {
         const getData = async () => {
             const token = typeof window !== 'undefined' ? localStorage.getItem('token') : null;
             try {
-                const res = await fetch(`${process.env.NEXT_PUBLIC_RUTE_BACKEND}/api/notes`, {
+                const res = await fetch(` https://${process.env.NEXT_PUBLIC_RUTE_BACKEND}/api/notes`, {
                     headers: {
                         'Authorization': token
                     }
@@ -104,7 +104,7 @@ export default function Tasks () {
 
     async function sendTaskDataBase () {
         try {
-            const res = await fetch(`${process.env.NEXT_PUBLIC_RUTE_BACKEND}/api/notes`, {
+            const res = await fetch(`https://${process.env.NEXT_PUBLIC_RUTE_BACKEND}/api/notes`, {
             method: "POST",
             headers: {
                 'Authorization': typeof window !== 'undefined' ? localStorage.getItem('token') : null,
