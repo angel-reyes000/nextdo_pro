@@ -53,7 +53,7 @@ export default function Login () {
             method: 'POST',
             headers: {
                 "Content-Type": "application/json",
-                "Authorization": localStorage.getItem('token')
+                "Authorization": typeof window !== 'undefined' ? localStorage.getItem('token') : null
             },
             body: JSON.stringify({
                 token: credentialResponse.credential

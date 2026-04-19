@@ -77,7 +77,6 @@ export default function Tasks () {
         setExpiredToken(bool)
         if (typeof window !== 'undefined'){
             localStorage.removeItem('token');
-
         }
     }
 
