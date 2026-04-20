@@ -8,6 +8,8 @@ import Task from './task_searcher_and_filter.jsx'
 import Task_edit from './task_edit.jsx'
 import Modal from './modal_expired_token.jsx'
 import { useRouter } from 'next/navigation';
+import 'aos/dist/aos.css';
+import AOS from 'aos';
 
 let ids = 0;
 let list_tasks = []
@@ -106,6 +108,14 @@ export default function Tasks () {
         getData()
     }, []);
 
+    useEffect(() => {
+        AOS.init({
+            duration: 1000,
+            delay: 0,
+            once: true
+        })
+    }, [])
+
     async function sendTaskDataBase () {
         try {
             const res = await fetch(`https://${process.env.NEXT_PUBLIC_RUTE_BACKEND}/api/notes`, {
@@ -132,7 +142,7 @@ export default function Tasks () {
             <div className={styles.tasks_window}>
                 <div className={styles.all_about_tasks}>
                     {/* -------------------------------- Create Tasks --------------------------------- */}
-                    <div className={styles.create_task}>
+                    <div data-aos='zoom-in' className={styles.create_task}>
                         <div className={styles.create_task_row_1}>
                             <div>
                                 <h1>Create New Task</h1>
@@ -154,7 +164,7 @@ export default function Tasks () {
                             </div>
                             <button onClick={() => {
                                 setFieldId(fieldId + 1)
-                                setTasks([...tasks, {id: fieldId, title: inputCreateTask || 'NA', description: inputCreateDescriptionTask || 'NA', deadline: inputCreateDeadLineTask || date, priority: priorityStateButton !== '' ? priorityStateButton : 'low'}])
+                                setTasks([...tasks, {id: fieldId, title: inputCreateTask || 'Sin titulo', description: inputCreateDescriptionTask || 'Sin descripcion', deadline: inputCreateDeadLineTask || date, priority: priorityStateButton !== '' ? priorityStateButton : 'low'}])
                                 setInputCreateTask('')
                                 setInputCreateDescriptionTask('')
                                 setInputCreateDeadLineTask('')
@@ -176,9 +186,9 @@ export default function Tasks () {
                             </div>
                         ) : null}
                     </div>
-                    <hr />
-                    {/* -------------------------- Filtros y busqueda -------------------------------- */}
-                    <div className={styles.filters_and_search}>
+                    <hr data-aos='fade-down'/>
+                    {/* -------------------------- Filtros y busqueda -------------------------------- */} 
+                    <div data-aos='fade-left' className={styles.filters_and_search}>
                         <div className={styles.input_filters_and_search}>
                             <FaSearch size={20}/>
                             <input value={inputSearchTask} onChange={(e) => setInputSearchTask(e.target.value)} placeholder='Search Task...'></input>
