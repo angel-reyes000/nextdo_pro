@@ -10,7 +10,7 @@ function OpenThreeDots ({ id }) {
     const router = useRouter()
 
     const deleteTaskDataBase = async (e) => {
-        const db = await fetch(`https://${process.env.NEXT_PUBLIC_RUTE_BACKEND}/api/notes`, {
+        await fetch(`https://${process.env.NEXT_PUBLIC_RUTE_BACKEND}/api/notes`, {
             method: "DELETE",
             headers: {
                 "Content-Type": "application/json"
@@ -85,7 +85,7 @@ export default function Task ({ tasks, inputSearchTask, selectPriority, selectDe
                                 <p>{task.description}</p>
                             </div>
                             <div className={styles.date_tasks}>
-                                <p><FaCalendar style={{display: 'inline'}}/> {task.deadline}</p>
+                                <p><FaCalendar style={{display: 'inline'}}/> {task.deadline ? task.deadline.split('T')[0] : ''}</p>
                             </div>
                         </div>
                         <OpenThreeDots id={task.id}/>
