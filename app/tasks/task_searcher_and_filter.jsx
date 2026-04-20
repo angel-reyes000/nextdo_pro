@@ -27,12 +27,12 @@ function OpenThreeDots ({ id }) {
                 e.stopPropagation()
                 setOptionDelete(!optionDelete)
             }}>...</h2>
-            {optionDelete ?  <h6 onClick={(e) => {
+            {optionDelete ?  <h6 onClick={async (e) => {
                 setOptionDelete(!optionDelete)
                 e.stopPropagation()
-                deleteTaskDataBase()
+                await deleteTaskDataBase()
                 router.refresh()
-                location.reload()
+                //location.reload()
             }}>Delete</h6> : null}
         </div>
     )
