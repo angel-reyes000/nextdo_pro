@@ -35,6 +35,10 @@ export default function Tasks () {
         setTasks(tasks.map(task => task.id === updatedTask.id ? updatedTask : task))
         setEditingTask(null)
     }
+
+    const handleDeleteTask = (id) => {
+        setTasks(tasks.filter(task => task.id !== id));
+    }
     
     let refHigh = refPriorityHigh.current
     let refMedium = refPriorityMedium.current
@@ -201,7 +205,7 @@ export default function Tasks () {
                     </div>
                     {/* ---------------------------- Tasks -------------------------------*/}
                     {editingTask && <Task_edit task={editingTask} onClose={() => setEditingTask(null)} onSave={handleUpdateTask} />}
-                    <Task tasks={tasks} inputSearchTask={inputSearchTask} selectPriority={selectPriority} selectDeadLine={selectDeadLine} onSelectTask={setEditingTask}/>
+                    <Task tasks={tasks} inputSearchTask={inputSearchTask} selectPriority={selectPriority} selectDeadLine={selectDeadLine} onSelectTask={setEditingTask} onDeleteTask={handleDeleteTask}/>
                     <Modal />
                 </div>
             </div>
