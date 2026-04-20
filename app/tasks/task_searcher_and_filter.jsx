@@ -5,7 +5,7 @@ import { FaCalendar, FaPlus } from 'react-icons/fa'
 import { useEffect, useState } from 'react'
 import { useRouter } from 'next/navigation'
 
-function OpenThreeDots ({ id }) {
+function OpenThreeDots ({ id, onDeleteTask }) {
     const [optionDelete, setOptionDelete] = useState(false);
     const router = useRouter()
 
@@ -31,14 +31,15 @@ function OpenThreeDots ({ id }) {
                 setOptionDelete(!optionDelete)
                 e.stopPropagation()
                 await deleteTaskDataBase()
-                router.refresh()
+                onDeleteTask(id)
+                // router.refresh()
                 //location.reload()
             }}>Delete</h6> : null}
         </div>
     )
 }
 
-export default function Task ({ tasks, inputSearchTask, selectPriority, selectDeadLine, onSelectTask }) {
+export default function Task ({ tasks, inputSearchTask, selectPriority, selectDeadLine, onSelectTask, onDeleteTask }) {
 
     function Warning() {
         const [showWarning, setShowWarning] = useState(false);
@@ -88,7 +89,7 @@ export default function Task ({ tasks, inputSearchTask, selectPriority, selectDe
                                 <p><FaCalendar style={{display: 'inline'}}/> {task.deadline ? task.deadline.split('T')[0] : ''}</p>
                             </div>
                         </div>
-                        <OpenThreeDots id={task.id}/>
+                        <OpenThreeDots id={task.id} onDeleteTask={onDeleteTask}/>
                     </div>
                 ))}
             </>
@@ -113,7 +114,7 @@ export default function Task ({ tasks, inputSearchTask, selectPriority, selectDe
                                 <p><FaCalendar style={{display: 'inline'}}/> {task.deadline}</p>
                             </div>
                         </div>
-                        <OpenThreeDots id={task.id}/>
+                        <OpenThreeDots id={task.id} onDeleteTask={onDeleteTask}/>
                     </div>
                 ))}
             </>
@@ -138,7 +139,7 @@ export default function Task ({ tasks, inputSearchTask, selectPriority, selectDe
                                 <p><FaCalendar style={{display: 'inline'}}/> {task.deadline}</p>
                             </div>
                         </div>
-                        <OpenThreeDots id={task.id}/>
+                        <OpenThreeDots id={task.id} onDeleteTask={onDeleteTask}/>
                     </div>
                 ))}
             </>
@@ -163,7 +164,7 @@ export default function Task ({ tasks, inputSearchTask, selectPriority, selectDe
                                 <p><FaCalendar style={{display: 'inline'}}/> {task.deadline}</p>
                             </div>
                         </div>
-                        <OpenThreeDots id={task.id}/>
+                        <OpenThreeDots id={task.id} onDeleteTask={onDeleteTask}/>
                     </div>
                 ))}
             </>
@@ -188,7 +189,7 @@ export default function Task ({ tasks, inputSearchTask, selectPriority, selectDe
                                 <p><FaCalendar style={{display: 'inline'}}/> {task.deadline}</p>
                             </div>
                         </div>
-                        <OpenThreeDots id={task.id}/>
+                        <OpenThreeDots id={task.id} onDeleteTask={onDeleteTask}/>
                     </div>
                 ))}
             </>
@@ -213,7 +214,7 @@ export default function Task ({ tasks, inputSearchTask, selectPriority, selectDe
                                 <p><FaCalendar style={{display: 'inline'}}/> {task.deadline}</p>
                             </div>
                         </div>
-                        <OpenThreeDots id={task.id}/>
+                        <OpenThreeDots id={task.id} onDeleteTask={onDeleteTask}/>
                     </div>
                 ))}
             </>
@@ -238,7 +239,7 @@ export default function Task ({ tasks, inputSearchTask, selectPriority, selectDe
                                 <p><FaCalendar style={{display: 'inline'}}/> {task.deadline}</p>
                             </div>
                         </div>
-                        <OpenThreeDots id={task.id}/>
+                        <OpenThreeDots id={task.id} onDeleteTask={onDeleteTask}/>
                     </div>
                 ))}
             </>
@@ -263,7 +264,7 @@ export default function Task ({ tasks, inputSearchTask, selectPriority, selectDe
                                 <p><FaCalendar style={{display: 'inline'}}/> {task.deadline}</p>
                             </div>
                         </div>
-                        <OpenThreeDots id={task.id}/>
+                        <OpenThreeDots id={task.id} onDeleteTask={onDeleteTask}/>
                     </div>
                 ))}
             </>
@@ -288,7 +289,7 @@ export default function Task ({ tasks, inputSearchTask, selectPriority, selectDe
                                 <p><FaCalendar style={{display: 'inline'}}/> {task.deadline}</p>
                             </div>
                         </div>
-                        <OpenThreeDots id={task.id}/>
+                        <OpenThreeDots id={task.id} onDeleteTask={onDeleteTask}/>
                     </div>
                 ))}
             </>
@@ -313,7 +314,7 @@ export default function Task ({ tasks, inputSearchTask, selectPriority, selectDe
                                 <p><FaCalendar style={{display: 'inline'}}/> {task.deadline}</p>
                             </div>
                         </div>
-                        <OpenThreeDots id={task.id}/>
+                        <OpenThreeDots id={task.id} onDeleteTask={onDeleteTask}/>
                     </div>
                 ))}
             </>
@@ -338,7 +339,7 @@ export default function Task ({ tasks, inputSearchTask, selectPriority, selectDe
                                 <p><FaCalendar style={{display: 'inline'}}/> {task.deadline}</p>
                             </div>
                         </div>
-                        <OpenThreeDots id={task.id}/>
+                        <OpenThreeDots id={task.id} onDeleteTask={onDeleteTask}/>
                     </div>
                 ))}
             </>
@@ -363,7 +364,7 @@ export default function Task ({ tasks, inputSearchTask, selectPriority, selectDe
                                 <p><FaCalendar style={{display: 'inline'}}/> {task.deadline}</p>
                             </div>
                         </div>
-                        <OpenThreeDots id={task.id}/>
+                        <OpenThreeDots id={task.id} onDeleteTask={onDeleteTask}/>
                     </div>
                 ))}
             </>
@@ -388,7 +389,7 @@ export default function Task ({ tasks, inputSearchTask, selectPriority, selectDe
                                 <p><FaCalendar style={{display: 'inline'}}/> {task.deadline}</p>
                             </div>
                         </div>
-                        <OpenThreeDots id={task.id}/>
+                        <OpenThreeDots id={task.id} onDeleteTask={onDeleteTask}/>
                     </div>
                 ))}
             </>
@@ -413,7 +414,7 @@ export default function Task ({ tasks, inputSearchTask, selectPriority, selectDe
                                 <p><FaCalendar style={{display: 'inline'}}/> {task.deadline}</p>
                             </div>
                         </div>
-                        <OpenThreeDots id={task.id}/>
+                        <OpenThreeDots id={task.id} onDeleteTask={onDeleteTask}/>
                     </div>
                 ))}
             </>
@@ -438,7 +439,7 @@ export default function Task ({ tasks, inputSearchTask, selectPriority, selectDe
                                 <p><FaCalendar style={{display: 'inline'}}/> {task.deadline}</p>
                             </div>
                         </div>
-                        <OpenThreeDots id={task.id}/>
+                        <OpenThreeDots id={task.id} onDeleteTask={onDeleteTask}/>
                     </div>
                 ))}
             </>
@@ -463,7 +464,7 @@ export default function Task ({ tasks, inputSearchTask, selectPriority, selectDe
                                 <p><FaCalendar style={{display: 'inline'}}/> {task.deadline}</p>
                             </div>
                         </div>
-                        <OpenThreeDots id={task.id}/>
+                        <OpenThreeDots id={task.id} onDeleteTask={onDeleteTask}/>
                     </div>
                 ))}
             </>
@@ -488,7 +489,7 @@ export default function Task ({ tasks, inputSearchTask, selectPriority, selectDe
                                 <p><FaCalendar style={{display: 'inline'}}/> {task.deadline}</p>
                             </div>
                         </div>
-                        <OpenThreeDots id={task.id}/>
+                        <OpenThreeDots id={task.id} onDeleteTask={onDeleteTask}/>
                     </div>
                 ))}
             </>
