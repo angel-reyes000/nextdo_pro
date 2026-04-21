@@ -132,6 +132,8 @@ export default function Tasks () {
                 priority: priorityStateButton
             })
         })
+        const data = await res.json();
+        return data
         } catch (error) {
             console.log("Error guardando tarea:", error);
         }
@@ -164,7 +166,7 @@ export default function Tasks () {
                             </div>
                             <button onClick={() => {
                                 setFieldId(fieldId + 1)
-                                setTasks([...tasks, {id: fieldId, title: inputCreateTask || 'Sin titulo', description: inputCreateDescriptionTask || 'Sin descripcion', deadline: inputCreateDeadLineTask || date, priority: priorityStateButton !== '' ? priorityStateButton : 'low'}])
+                                setTasks([...tasks, data.respuesta])
                                 setInputCreateTask('')
                                 setInputCreateDescriptionTask('')
                                 setInputCreateDeadLineTask('')
