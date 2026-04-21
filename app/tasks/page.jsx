@@ -99,7 +99,6 @@ export default function Tasks () {
                 activeDialog({ bool:true })
             }
             const data = await res.json();
-            console.log(data.response) 
             setTasks(data.response || [])
         } catch (error) {
             console.log("Error al obtener datos", error.messasge);    
