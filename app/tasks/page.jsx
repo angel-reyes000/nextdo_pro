@@ -164,9 +164,10 @@ export default function Tasks () {
                                 <label htmlFor='deadline'>Deadline: </label>
                                 <input value={inputCreateDeadLineTask} onChange={(e) => setInputCreateDeadLineTask(e.target.value)} type='date' placeholder='Deadline' id="deadline" name="deadline"></input>
                             </div>
-                            <button onClick={() => {
-                                setFieldId(fieldId + 1)
-                                setTasks([...tasks, data.respuesta])
+                            <button onClick={async () => {
+                                //setFieldId(fieldId + 1)
+                                const data = await sendTaskDataBase()
+                                setTasks([...tasks, data.respuesta[0]])
                                 setInputCreateTask('')
                                 setInputCreateDescriptionTask('')
                                 setInputCreateDeadLineTask('')
