@@ -86,25 +86,27 @@ export default function Tasks () {
         }
     }
 
-    useEffect(() => { 
-        const getData = async () => {
-            const token = typeof window !== 'undefined' ? localStorage.getItem('token') : null;
-            try {
-                const res = await fetch(` https://${process.env.NEXT_PUBLIC_RUTE_BACKEND}/api/notes`, {
-                    headers: {
-                        'Authorization': token
-                    }
-                });
-                if(!res.ok) {
-                    activeDialog({ bool:true })
+     
+    const getData = async () => {
+        const token = typeof window !== 'undefined' ? localStorage.getItem('token') : null;
+        try {
+            const res = await fetch(` https://${process.env.NEXT_PUBLIC_RUTE_BACKEND}/api/notes`, {
+                headers: {
+                    'Authorization': token
                 }
-                const data = await res.json();
-                setTasks(data.response || [])
-            } catch (error) {
-                console.log("Error al obtener datos", error.messasge);    
-                setTasks([])
+            });
+            if(!res.ok) {
+                activeDialog({ bool:true })
             }
+            const data = await res.json();
+            setTasks(data.response || [])
+        } catch (error) {
+            console.log("Error al obtener datos", error.messasge);    
+            setTasks([])
         }
+    }
+
+    useEffect(() => {
         getData()
     }, []);
 
